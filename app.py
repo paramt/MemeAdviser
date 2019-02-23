@@ -31,7 +31,7 @@ submission = next(submissions)
 while submission.stickied:
     submission = submissions.next()
 
-minutes = round((time.time() - submission.created_utc)/60)
+minutes = int(round((time.time() - submission.created_utc)/60))
 
 if minutes >= 60:
     minutes = str(minutes//60) + "h " + str(minutes % 60) + "min"
