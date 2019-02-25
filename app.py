@@ -6,7 +6,7 @@ from datetime import datetime
 import time
 import algorithm
 
-template = '''This post hit #1 on [the front page](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvote(s).
+template = '''This post hit #1 on [the front page](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvotes.
 If you invest now, you'll break even at **{break_even}** upvotes.
 
 &#x200B;
@@ -24,9 +24,6 @@ else:
         replied = list(filter(None, f.read().split("\n")))
 
 subreddit = reddit.subreddit("MemeEconomy")
-post_subreddit = reddit.subreddit("MemeAdviser")
-post_subreddit2 = reddit.subreddit("InsiderMemeTrading")
-
 submissions = subreddit.hot()
 submission = next(submissions)
 
@@ -42,11 +39,11 @@ else:
 
 if submission.id not in replied:
     if submission.score < 3000:
-        post_subreddit2.submit("This meme just hit #1 on MemeEconomy with only " + submission.score +
-                               " upvotes - Invest now and break even at " + algorithm.break_even(submission.score) + " upvotes", url=submission.permalink)
+        submission.crosspost("MemeAdviser", title="This meme just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) +
+                             " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes")
     submission.reply(template.format(upvotes=str(submission.score),
                                      time=str(datetime.utcfromtimestamp(submission.created_utc).strftime('%B %d %H:%M:%S')), min=minutes, break_even=algorithm.break_even(submission.score)))
-    # post_subreddit.submit(submission.title, selftext="[This submission](https://www.reddit.com/r/MemeEconomy/comments/" + submission.id + ") was posted **" + minutes + "** ago and has reached #1 on the front page of MemeEconomy with **" + str("{:,}".format(submission.score)) + "** upvotes. \n \n Invest now and you'll break-even at **" + str("{:,}".format(algorithm.break_even(submission.score))) + "** upvotes")
+    # reddit.subreddit("MemeAdviser").submit(submission.title, selftext="[This submission](https://www.reddit.com/r/MemeEconomy/comments/" + submission.id + ") was posted **" + minutes + "** ago and has reached #1 on the front page of MemeEconomy with **" + str("{:,}".format(submission.score)) + "** upvotes. \n \n Invest now and you'll break-even at **" + str("{:,}".format(algorithm.break_even(submission.score))) + "** upvotes")
     print("Bot replying to : ", submission.title)
     replied.append(submission.id)
     with open("replied.txt", "w") as f:
