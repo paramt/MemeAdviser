@@ -17,10 +17,10 @@ If you invest now, you'll break even at **{break_even}** upvotes.
 
 reddit = praw.Reddit('MemeAdviser')
 
-if not os.path.isfile("replied.txt"):
+if not os.path.isfile("../../replied.txt"):
     replied = []
 else:
-    with open("replied.txt", "r") as f:
+    with open("../../replied.txt", "r") as f:
         replied = list(filter(None, f.read().split("\n")))
 
 subreddit = reddit.subreddit("MemeEconomy")
@@ -47,6 +47,6 @@ if submission.id not in replied:
     # reddit.subreddit("MemeAdviser").submit(submission.title, selftext="[This submission](https://www.reddit.com/r/MemeEconomy/comments/" + submission.id + ") was posted **" + minutes + "** ago and has reached #1 on the front page of MemeEconomy with **" + str("{:,}".format(submission.score)) + "** upvotes. \n \n Invest now and you'll break-even at **" + str("{:,}".format(algorithm.break_even(submission.score))) + "** upvotes")
     print("Bot replying to : ", submission.title)
     replied.append(submission.id)
-    with open("replied.txt", "w") as f:
+    with open("../../replied.txt", "w") as f:
         for post_id in replied:
             f.write(post_id + "\n")
