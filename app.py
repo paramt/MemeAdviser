@@ -17,8 +17,8 @@ If you invest now, you'll break even at **{break_even}** upvotes.
 try:
     reddit = praw.Reddit('MemeAdviser')
 except:
-    reddit = praw.Reddit(client_id=os.environ['client_id'], client_scecret=os.environ['client_secret'],
-                         password=os.environ['password'], user_agent=os.environ['user_agent'], username=os.environ['username'])
+    reddit = praw.Reddit(client_id=os.getenv['CLIENT_ID'], client_scecret=os.getenv['CLIENT_SECRET'],
+                         password=os.getenv['PASSWORD'], user_agent="MemeAdviser 0.1", username="MemeAdviser")
 
 if not os.path.isfile("../replied.txt"):
     replied = []
