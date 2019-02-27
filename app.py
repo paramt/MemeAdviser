@@ -26,6 +26,13 @@ else:
     with open("../replied.txt", "r") as f:
         replied = list(filter(None, f.read().split("\n")))
 
+build = '0'
+
+try:
+    build = os.environ['BUILD']
+except:
+    pass
+
 subreddit = reddit.subreddit("MemeEconomy")
 post_subreddit = reddit.subreddit("InsiderMemeTrading")
 submissions = subreddit.hot()
@@ -41,7 +48,7 @@ if minutes >= 60:
 else:
     minutes = str(round((time.time() - submission.created_utc)/60)) + " minutes"
 
-if submission.id not in replied:
+if submission.id not in replied and build = '0':
     if submission.score < 1500:
         post_subreddit.submit(title="This meme just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) +
                               " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes", url="https://reddit.com" + submission.permalink)
