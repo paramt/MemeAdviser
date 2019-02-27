@@ -14,8 +14,11 @@ If you invest now, you'll break even at **{break_even}** upvotes.
 ^(Beep boop, I'm a bot. | [Contact me](mailto://bot@param.me))
 '''
 
-
-reddit = praw.Reddit('MemeAdviser')
+try:
+    reddit = praw.Reddit('MemeAdviser')
+except:
+    reddit = praw.Reddit(client_id=os.environ['client_id'], client_scecret=os.environ['client_secret'],
+                         password=os.environ['password'], user_agent=os.environ['user_agent'], username=os.environ['username'])
 
 if not os.path.isfile("../replied.txt"):
     replied = []
