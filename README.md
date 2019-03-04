@@ -8,7 +8,8 @@ As soon as a post hits #1 on [the front page](https://www.reddit.com/r/MemeEcono
 You can expect many more features to come, including:
  - [ ] Calculating the current break-even point of an investment when it is summoned with ```!breakeven```
  - [ ] Monitoring more of the front page (like top 5 or top 10 on hot)
- - [ ] Automatically updating the formula to the [official](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py) one
+ - [ ] Allowing users to ```!watch``` a post, which will send updates to the user for the next 4 hours
+ - [ ] Automatically updating the formula the [official](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py) one
 
 ### Status
 <img width="15%" src="https://thakkaha.dev.fast.sheridanc.on.ca/pme/meme/status/light/">
