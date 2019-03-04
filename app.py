@@ -49,7 +49,7 @@ else:
     minutes = str(round((time.time() - submission.created_utc)/60)) + " minutes"
 
 if submission.id not in replied and build == '0':
-    if submission.score < 1000:
+    if submission.score < 500:
         post_subreddit.submit(title="This meme just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) +
                               " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes", url="https://reddit.com" + submission.permalink)
     submission.reply(template.format(upvotes=str(submission.score),
