@@ -26,6 +26,12 @@ else:
     with open("../replied.txt", "r") as f:
         replied = list(filter(None, f.read().split("\n")))
 
+if not os.path.isfile("../subscribed.txt"):
+    subscribed = []
+else:
+    with open("../subscribed.txt", "r") as f:
+        subscribed = list(filter(None, f.read().split("\n")))
+
 build = '0'
 
 try:
@@ -52,6 +58,11 @@ if submission.id not in replied and build == '0':
     if submission.score < 800:
         post_subreddit.submit(title="This meme just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) +
                               " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes", url="https://reddit.com" + submission.permalink)
+
+        for user in subscribed:
+            reddit.redditor(subscribed).message("MemeEconomy Update", "[This meme](https://reddit.com" + submission.permalink + ") just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) +
+                                                " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes" + "\n\n *** \n\n ^(You're recieving this message because you've subscribed to this bot. To unsubscribe, contact u/hypnotic-hippo)")
+
     submission.reply(template.format(upvotes=str(submission.score),
                                      time=str(datetime.utcfromtimestamp(submission.created_utc).strftime('%B %d %H:%M:%S')), min=minutes, break_even=algorithm.break_even(submission.score)))
     # reddit.subreddit("MemeAdviser").submit(submission.title, selftext="[This submission](https://www.reddit.com/r/MemeEconomy/comments/" + submission.id + ") was posted **" + minutes + "** ago and has reached #1 on the front page of MemeEconomy with **" + str("{:,}".format(submission.score)) + "** upvotes. \n \n Invest now and you'll break-even at **" + str("{:,}".format(algorithm.break_even(submission.score))) + "** upvotes")
