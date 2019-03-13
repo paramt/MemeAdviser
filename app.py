@@ -20,11 +20,17 @@ except:
     reddit = praw.Reddit(client_id=os.environ['CLIENT_ID'], client_secret=os.environ['CLIENT_SECRET'], password=os.environ['PASSWORD'], user_agent="MemeAdviser 0.1", username="MemeAdviser")
 
 
-with open("../replied.txt", "r") as f:
-    replied = list(filter(None, f.read().split("\n")))
+if not os.path.isfile("../replied.txt"):
+    replied = []
+else:
+    with open("../replied.txt", "r") as f:
+        replied = list(filter(None, f.read().split("\n")))
 
-with open("../subscribed.txt", "r") as f:
-    subscribed = list(filter(None, f.read().split("\n")))
+if not os.path.isfile("../subscribed.txt"):
+    subscribed = []
+else:
+    with open("../subscribed.txt", "r") as f:
+        subscribed = list(filter(None, f.read().split("\n")))
 
 build = '0'
 
