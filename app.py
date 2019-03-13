@@ -20,11 +20,12 @@ except:
     reddit = praw.Reddit(client_id=os.environ['CLIENT_ID'], client_secret=os.environ['CLIENT_SECRET'],
                          password=os.environ['PASSWORD'], user_agent="MemeAdviser 0.1", username="MemeAdviser")
 
-if not os.path.isfile("../replied.txt"):
-    replied = []
-else:
-    with open("../replied.txt", "r") as f:
-        replied = list(filter(None, f.read().split("\n")))
+
+with open("../replied.txt", "r") as f:
+    replied = list(filter(None, f.read().split("\n")))
+
+with open("../subscribed.txt", "r") as f:
+    replied = list(filter(None, f.read().split("\n")))
 
 build = '0'
 
@@ -55,6 +56,9 @@ if submission.id not in replied and build == '0':
 
     submission.reply(template.format(upvotes=str(submission.score),
                                      time=str(datetime.utcfromtimestamp(submission.created_utc).strftime('%B %d %H:%M:%S')), min=minutes, break_even=algorithm.break_even(submission.score)))
+    for user in subscribed:
+        reddit.redditor(user).message("MemeEconomy Update", "[This meme](https://reddit.com" + submission.permalink + ") just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) + " upvotes! Invest now and break even at " + "{:,}".format(1200) + " upvotes" + "\n\n *** \n\n ^(You're recieving this message because you've subscribed to this bot. To unsubscribe, contact u/hypnotic-hippo)")
+        print("Messaging " + user)
 
     # reddit.subreddit("MemeAdviser").submit(submission.title, selftext="[This submission](https://www.reddit.com/r/MemeEconomy/comments/" + submission.id + ") was posted **" + minutes + "** ago and has reached #1 on the front page of MemeEconomy with **" + str("{:,}".format(submission.score)) + "** upvotes. \n \n Invest now and you'll break-even at **" + str("{:,}".format(algorithm.break_even(submission.score))) + "** upvotes")
     print("Bot replying to : ", submission.title)
