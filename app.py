@@ -24,7 +24,7 @@ with open("../replied.txt", "r") as f:
     replied = list(filter(None, f.read().split("\n")))
 
 with open("../subscribed.txt", "r") as f:
-    replied = list(filter(None, f.read().split("\n")))
+    subscribed = list(filter(None, f.read().split("\n")))
 
 build = '0'
 
