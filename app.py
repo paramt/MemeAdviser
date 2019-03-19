@@ -44,13 +44,13 @@ while submission.stickied:
     submission = submissions.next()
 
 # Find out how old the post is
-minutes = int(round((time.time() - submission.created_utc)/60))
+minutes = int(round((time.time() - submission.created_utc) / 60))
 
 # Store time in hours
 if minutes >= 60:
-    minutes = str(minutes//60) + "h " + str(minutes % 60) + "min"
+    minutes = str(minutes // 60) + "h " + str(minutes % 60) + "min"
 else:
-    minutes = str(round((time.time() - submission.created_utc)/60)) + " minutes"
+    minutes = str(round((time.time() - submission.created_utc) / 60)) + " minutes"
 
 if submission.id not in replied and build == '0':
     # Post to r/InsiderMemeTrading
