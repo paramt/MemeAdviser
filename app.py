@@ -86,7 +86,7 @@ for message in reddit.inbox.unread():
                     f.write(user + "\n")
             message.reply("You've unsubscribed from MemeAdviser! To subscribe, reply with 'Subscribe'")
         else:
-            message.reply("You've already unsubscribed from MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
+            message.reply("You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
 
     # Check for new subscriptions
     elif re.search("subscribe", message.body, re.IGNORECASE) or re.search("subscribe", message.subject, re.IGNORECASE):
