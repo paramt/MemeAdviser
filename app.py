@@ -31,12 +31,9 @@ else:
     with open("../subscribed.txt", "r") as f:
         subscribed = list(filter(None, f.read().split("\n")))
 
-build = '0'
-
-try:
-    build = os.environ['BUILD']
-except:
-    pass
+build = os.getenv("BUILD")
+if build is None:
+    build = '0'
 
 subreddit = reddit.subreddit("MemeEconomy")
 post_subreddit = reddit.subreddit("InsiderMemeTrading")
