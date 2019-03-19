@@ -5,12 +5,11 @@ from datetime import datetime
 import time
 import algorithm
 
-template = '''This post hit #1 on [the front page](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvotes.
-If you invest now, you'll break even at **{break_even}** upvotes.
+template = '''I **strongly advise** investing! This meme hit #1 on [hot](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvotes. If you invest now, you'll break even at **{break_even}** upvotes.
 
-&#x200B;
+*****
 
-^(Beep boop, I'm a bot. | [Contact me](mailto://bot@param.me))
+^(Beep boop, I'm a bot | [Contact me](mailto://bot@param.me))
 '''
 
 try:
