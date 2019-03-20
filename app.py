@@ -69,8 +69,11 @@ if submission.id not in replied and build == '0':
         for post_id in replied:
             f.write(post_id + "\n")
 
+unread_messages = []
+
 # Go through each unread message
 for message in reddit.inbox.unread():
+    unread_messages.append(message)
 
     # Check for new unsubscriptions
     if re.search("unsubscribe", message.body, re.IGNORECASE) or re.search("unsubscribe", message.subject, re.IGNORECASE):
@@ -94,9 +97,9 @@ for message in reddit.inbox.unread():
         else:
             message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
 
+    # Reply to !breakeven requests
+    elif message.body == "!breakeven".strip() or message.body == "!break-even".strip():
+        message.reply("Invest now and break even at **" + "{:,}".format(algorithm.break_even(message.parent().parent().score)) + "** upvotes.")
 
 # Mark all messages as read
-unread_messages = []
-for item in reddit.inbox.unread(limit=None):
-    unread_messages.append(item)
 reddit.inbox.mark_read(unread_messages)

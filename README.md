@@ -13,7 +13,7 @@ The bot lets users subscribe to it. When it finds a promising meme, it messages 
 
 ### Coming Soon
 You can expect many more features to come, including:
- - [ ] Calculating the current break-even point of an investment when it is summoned with ```!breakeven```
+ - [x] Calculating the current break-even point of an investment when it is summoned with ```!breakeven```
  - [ ] Monitoring more of the front page (like top 5 or top 10 on hot)
  - [ ] Allowing users to ```!watch``` a post, which will send updates to the user for the next 4 hours
  - [ ] Automatically updating the formula the [official](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py) one
