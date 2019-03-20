@@ -5,6 +5,16 @@ from datetime import datetime
 import time
 import algorithm
 
+
+def get_submission(comment):
+    parent = comment.parent()
+
+    while isinstance(parent, praw.models.Comment):
+        parent = parent.parent()
+
+    return parent
+
+
 template = '''I **strongly advise** investing! This meme hit #1 on [hot](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvotes. If you invest now, you'll break even at **{break_even}** upvotes.
 
 *****
@@ -99,7 +109,7 @@ for message in reddit.inbox.unread():
 
     # Reply to !breakeven requests
     elif message.body == "!breakeven".strip() or message.body == "!break-even".strip():
-        message.reply("Invest now and break even at **" + "{:,}".format(algorithm.break_even(message.parent().parent().score)) + "** upvotes.")
+        message.reply("Invest now and break even at **" + "{:,}".format(algorithm.break_even(get_submission(message).score)) + "** upvotes.")
 
 # Mark all messages as read
 reddit.inbox.mark_read(unread_messages)
