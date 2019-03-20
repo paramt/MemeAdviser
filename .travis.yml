@@ -6,9 +6,9 @@ python: '3.6'
 install:
 - python3 -m pip install -r requirements.txt
 script:
-- python3 app.py
+- make
 - python3 -m safety check --full-report -r ./requirements.txt
-- python3 -m flake8 --ignore=E501,E722 *.py
+- make lint
 env:
   global:
   - secure: bZE4qBi+QV4vCARo7Ht2Y/YU4SZuAS+DsjJkudbhHLC1Z5kMICoMoKVunH0QawXXsc5wLTNL4yErf54RjaaPQKQp75NR2hNbsKxT+y2Zedq0YzFGdoHVbO3S2Anu61aDTkqrRiLLTbzjujQBiXPejWJUBsfdPqrGuLBrhdpC58qmGPZUi8P9I8yyi9ywuHr5TQpQRqw6ultwJpCWmzL6oUCiO19WwHba3l6LYhG5vP4aTl9CU7aTirmDANiB5DQBOig1/frmCOS5rX5oZCdgPUFFxqAD3sR2QjSEa1qWW1WdczjKcfLCnJRxq2WTcB7d41i/S8ptduPgYz7UCpXry5F1nDs5Vsw5vADBL8Ywm1Ru9GFkRMGxlP3Gfm01CzzhVEYYZ5HW2mf5YrJiEpExVbXA/U/GoiVGcP1B+yVsLojXyTjkVXkT4JXLrkcmEFcm5A+V7G0W8B+WtsfARdg4CZ1OJwHwk9WBfhGXgmS4HHBJrpKrLJz2MwpRtnsQn+pl2P4m8Fu//ghp1vBOnt3SFaO5lb9MAa2DEsqFEPm9jHDP13q5W71bGrwP+FJgZ91OXkJmTPbFZQpf3TQZhDthuxLTE95x+ZhIJ62AnuwzUeKcUFQp7aK3LeBq9iAl7Ww/LkVar13b8OQQ/QLtvJe+DPSQlrd9kVBOexxpnQkSNgY=
