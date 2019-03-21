@@ -108,7 +108,7 @@ for message in reddit.inbox.unread():
             message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
 
     # Reply to !breakeven requests
-    elif message.body == "!breakeven".strip() or message.body == "!break-even".strip() or message.body == "u/MemeAdviser".strip():
+    elif message.body == "!breakeven".strip() or message.body == "!break-even".strip() or message.body == "u/MemeAdviser".strip() or message.body == "/u/MemeAdviser".strip():
         message.reply("Invest now and break even at **" + "{:,}".format(algorithm.break_even(get_submission(message).score)) + "** upvotes.")
 
 # Mark all messages as read
