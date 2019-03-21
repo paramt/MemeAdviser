@@ -1,0 +1,20 @@
+container:
+  image: python:3.6.5
+
+task:
+  name: Test
+  env:
+    build: '1'
+    CLIENT_ID: ENCRYPTED[a9708786aaecae7bafea1f541a9fe3bfc0a6d403485e45071c243f17dbecbfb4d6d0f91f36e7e5b6a90582a1c97bb369]
+    CLIENT_SECRET: ENCRYPTED[6dad84a5403af92190baeb0bd54e3ee46b8afc049633b577f8a4030042c87b6d171b4349f544da20bb1024b70cbd4644]
+    PASSWORD: ENCRYPTED[9b807c2602b65a6dd426b29f703129df42244129ff60a71bf3a8e72c264849af33c1a03b61ca37d495454e9e2b6087eb]
+  Python_cache:
+    folder: /usr/local/lib/python3.7/site-packages
+    fingerprint_script:
+      - echo $CI
+      - echo $OS
+      - echo $PYTHON_VERSION
+      - echo $CIRRUS_SHELL
+    populate_script: python3 -m pip install --upgrade -r ./requirements.txt
+  script:
+    - find . -name \*.py -exec python3 -m flake8 {} \;
