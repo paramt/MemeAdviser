@@ -1,6 +1,5 @@
 import praw
 import re
-import os
 from datetime import datetime
 import time
 import algorithm
@@ -24,32 +23,13 @@ template = '''I **strongly advise** investing! This meme hit #1 on [hot](https:/
 ^(Beep boop, I'm a bot | [Contact me](mailto://bot@param.me))
 '''
 
-try:
-    reddit = praw.Reddit('MemeAdviser')
-except:
-    reddit = praw.Reddit(
-        client_id=os.getenv('CLIENT_ID'),
-        client_secret=os.getenv('CLIENT_SECRET'),
-        password=os.getenv('PASSWORD'),
-        user_agent="MemeAdviser 0.1",
-        username="MemeAdviser"
-    )
+reddit = praw.Reddit('MemeAdviser')
 
-if not os.path.isfile("../replied.txt"):
-    replied = []
-else:
-    with open("../replied.txt", "r") as f:
-        replied = list(filter(None, f.read().split("\n")))
+with open("../replied.txt", "r") as f:
+    replied = list(filter(None, f.read().split("\n")))
 
-if not os.path.isfile("../subscribed.txt"):
-    subscribed = []
-else:
-    with open("../subscribed.txt", "r") as f:
-        subscribed = list(filter(None, f.read().split("\n")))
-
-build = os.getenv("BUILD")
-if build is None:
-    build = '0'
+with open("../subscribed.txt", "r") as f:
+    subscribed = list(filter(None, f.read().split("\n")))
 
 subreddit = reddit.subreddit("MemeEconomy")
 post_subreddit = reddit.subreddit("InsiderMemeTrading")
@@ -68,7 +48,7 @@ if minutes >= 60:
 else:
     minutes = str(round((time.time() - submission.created_utc) / 60)) + " minutes"
 
-if submission.id not in replied and build == '0':
+if submission.id not in replied:
     # Post to r/InsiderMemeTrading
     if submission.score < 800:
         post_subreddit.submit(title="This meme just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) + " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes", url="https://reddit.com" + submission.permalink)
@@ -115,7 +95,7 @@ for message in reddit.inbox.unread():
         else:
             message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
 
-    # Reply to !breakeven requests (currently commented out because it was "too spammy")
+    # Reply to !breakeven requests (commented out because it was too spammy)
     # elif message.body == "!breakeven".strip() or message.body == "!break-even".strip() or message.body == "u/MemeAdviser".strip() or message.body == "/u/MemeAdviser".strip():
     #     message.reply("Invest now and break even at **" + "{:,}".format(algorithm.break_even(get_submission(message).score)) + "** upvotes.")
 
