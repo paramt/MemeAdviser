@@ -17,6 +17,8 @@ def get_submission(comment):
 
 template = '''I **strongly advise** investing! This meme hit #1 on [hot](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvotes. If you invest now, you'll break even at **{break_even}** upvotes.
 
+[Click here](https://www.param.me/meme/calculator/break-even) to calculate the current break-even point. To eliminate spam, this bot will *not* reply to any commands.
+
 *****
 
 ^(Beep boop, I'm a bot | [Contact me](mailto://bot@param.me))
