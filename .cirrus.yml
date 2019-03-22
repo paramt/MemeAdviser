@@ -3,4 +3,4 @@ task:
   container:
     image: jumbocakeyumyum/flake8:latest
   script:
-    - find . -name \*.py -exec python3 -m flake8 {} \;
+    - make lint
