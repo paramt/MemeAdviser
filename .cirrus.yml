@@ -3,5 +3,4 @@ task:
   container:
     image: jumbocakeyumyum/flake8:latest
   script:
-    - python3 -m flake8 --version
     - find . -name \*.py -exec python3 -m flake8 {} \;
