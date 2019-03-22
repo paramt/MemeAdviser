@@ -49,6 +49,12 @@ else:
     minutes = str(round((time.time() - submission.created_utc) / 60)) + " minutes"
 
 if submission.id not in replied:
+    # Update replied.txt
+    replied.append(submission.id)
+    with open("../replied.txt", "w") as f:
+        for post_id in replied:
+            f.write(post_id + "\n")
+
     # Post to r/InsiderMemeTrading
     if submission.score < 800:
         post_subreddit.submit(title="This meme just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) + " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes", url="https://reddit.com" + submission.permalink)
@@ -60,12 +66,6 @@ if submission.id not in replied:
 
     # Comment on r/MemeEconomy post
     submission.reply(template.format(upvotes=str(submission.score), time=str(datetime.utcfromtimestamp(submission.created_utc).strftime('%B %d %H:%M:%S')), min=minutes, break_even=algorithm.break_even(submission.score)))
-
-    # Update replied.txt
-    replied.append(submission.id)
-    with open("../replied.txt", "w") as f:
-        for post_id in replied:
-            f.write(post_id + "\n")
 
 unread_messages = []
 
