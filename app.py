@@ -84,7 +84,7 @@ for message in reddit.inbox.unread():
             with open("../subscribed.txt", "w") as f:
                 for user in subscribed:
                     f.write(user + "\n")
-            message.reply("You've unsubscribed from MemeAdviser! To subscribe, reply with 'Subscribe'")
+            message.reply("You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
         else:
             message.reply("You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
 
