@@ -9,16 +9,16 @@ As soon as a post hits #1 on [the front page](https://www.reddit.com/r/MemeEcono
 If the post has a low number of upvotes at the time, it posts the link to [r/InsiderMemeTrading](https://www.reddit.com/r/InsiderMemeTrading) and provides the break-even point for any investment made during that time. These can be found [here](https://www.reddit.com/u/MemeAdviser/posts).
 
 #### Subscriptions
-The bot lets users subscribe to it. When it finds a promising meme, it messages the link to everyone that's subscribed. It also provides a more in-depth analysis of the meme. Currently, redditors can subscribe to the bot by sending a private message to [u/MemeAdviser](https://reddit.com/u/MemeAdviser) with the text "Subscribe" as the subject and body.
+The bot lets users subscribe to it. When it finds a promising meme, it messages the link to everyone that's subscribed. It also provides a more in-depth analysis of the meme. Redditors can subscribe to the bot by sending a private message to [u/MemeAdviser](https://reddit.com/u/MemeAdviser) with the text "Subscribe" as the subject or body.
 
-### Coming Soon
-You can expect many more features to come, including:
- - [x] ~~Calculating the current break-even point of an investment when it is summoned with ```!breakeven```~~
- - [ ] Monitoring more of the front page (like top 5 or top 10 on hot)
- - [ ] ~~Allowing users to ```!watch``` a post, which will send updates to the user for the next 4 hours~~
- - [ ] Automatically updating the formula the [official](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py) one
+### TODO
+ - [x] Allow Redditors to subscribe to the bot to receive regular updates on the market
+ - [x] ~~Calculate the current break-even point of an investment when summoned with ```!breakeven```~~
+ - [ ] Monitor more of the front page (like top 5 or top 10 on hot)
+ - [ ] ~~Allow users to ```!watch``` a post, which will send updates to the user for the next 4 hours~~
+ - [ ] Automatically update the formula the [official formula](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py)
  
- \*commands will not be added to reduce spam
+ \*commands will not be added because it creates too much spam
 
 ### Status
 <img width="15%" src="https://thakkaha.dev.fast.sheridanc.on.ca/pme/meme/status/light/">
