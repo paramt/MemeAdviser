@@ -1,6 +1,0 @@
-task:
-  name: Test
-  container:
-    image: jumbocakeyumyum/flake8:latest
-  script:
-    - make lint
