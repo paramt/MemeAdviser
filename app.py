@@ -14,13 +14,22 @@ def get_submission(comment):
     return parent
 
 
-template = '''I **strongly advise** investing! This meme hit #1 on [hot](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvotes. If you invest now, you'll break even at **{break_even}** upvotes.
+comment_message = '''I **strongly advise** investing! This meme hit #1 on [hot](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvotes. If you invest now, you'll break even at **{break_even}** upvotes.
 
 [Click here](https://www.param.me/meme/calculator/break-even) to calculate the current break-even point. [Click here](https://www.reddit.com/message/compose?to=MemeAdviser&subject=Subscribe&message=Subscribe) to subscribe to daily market updates.
 
 *****
 
 ^(Beep boop, I'm a bot | [Contact me](mailto://bot@param.me))
+'''
+
+submission_message = "This meme just hit #1 on MemeEconomy with only {upvotes} upvotes! Invest now and break even at {break_even} upvotes"
+
+update_message = '''[This meme](https://reddit.com{link}) just hit #1 on MemeEconomy with only {upvotes} upvotes! Invest now and break even at {break_even} upvotes
+
+***
+
+^(You're recieving this message because you've subscribed to this bot. To unsubscribe, reply 'Unsubscribe')
 '''
 
 reddit = praw.Reddit('MemeAdviser')
@@ -58,16 +67,16 @@ if submission.id not in replied:
 
         # Post to r/InsiderMemeTrading
         if submission.score < 800:
-            post_subreddit.submit(title="This meme just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) + " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes", url="https://reddit.com" + submission.permalink)
+            post_subreddit.submit(title=submission_message.format(upvotes=submission.score, break_even=algorithm.break_even(submission.score)), url="https://reddit.com" + submission.permalink)
 
         # Send PM to subscribers
         if submission.score < 1000:
             for user in subscribed:
-                reddit.redditor(user).message("MemeEconomy Update", "[This meme](https://reddit.com" + submission.permalink + ") just hit #1 on MemeEconomy with only " + "{:,}".format(submission.score) + " upvotes! Invest now and break even at " + "{:,}".format(algorithm.break_even(submission.score)) + " upvotes" + "\n\n *** \n\n ^(You're recieving this message because you've subscribed to this bot. To unsubscribe, reply 'Unsubscribe')")
+                reddit.redditor(user).message("MemeEconomy Update", update_message.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
 
         # Comment on r/MemeEconomy post
         if submission.score < 1000:
-            submission.reply(template.format(upvotes=str(submission.score), time=str(datetime.utcfromtimestamp(submission.created_utc).strftime('%B %d %H:%M:%S')), min=minutes, break_even=algorithm.break_even(submission.score)))
+            submission.reply(comment_message.format(upvotes=str(submission.score), time=str(datetime.utcfromtimestamp(submission.created_utc).strftime('%B %d %H:%M:%S')), min=minutes, break_even=algorithm.break_even(submission.score)))
 
     except:
         pass
