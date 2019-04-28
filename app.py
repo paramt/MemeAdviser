@@ -4,16 +4,6 @@ from datetime import datetime
 import time
 import algorithm
 
-
-def get_submission(comment):
-    parent = comment.parent()
-
-    while isinstance(parent, praw.models.Comment):
-        parent = parent.parent()
-
-    return parent
-
-
 comment_message = '''I **strongly advise** investing! This meme hit #1 on [hot](https://www.reddit.com/r/memeeconomy/hot/) within **{min}**, at **{upvotes}** upvotes. If you invest now, you'll break even at **{break_even}** upvotes.
 
 [Click here](https://www.param.me/meme/calculator/break-even) to calculate the current break-even point. [Click here](https://www.reddit.com/message/compose?to=MemeAdviser&subject=Subscribe&message=Subscribe) to subscribe to daily market updates.
@@ -108,10 +98,6 @@ for message in reddit.inbox.unread():
             message.reply("You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
         else:
             message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
-
-    # Reply to !breakeven requests (commented out because it was too spammy)
-    # elif message.body == "!breakeven".strip() or message.body == "!break-even".strip() or message.body == "u/MemeAdviser".strip() or message.body == "/u/MemeAdviser".strip():
-    #     message.reply("Invest now and break even at **" + "{:,}".format(algorithm.break_even(get_submission(message).score)) + "** upvotes.")
 
 # Mark all messages as read
 reddit.inbox.mark_read(unread_messages)
