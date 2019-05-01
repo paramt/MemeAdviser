@@ -1,6 +1,6 @@
 # MemeAdviser <img height=44 src=docs/logo.png align=left>
 [![Uptime](https://img.shields.io/uptimerobot/ratio/m782558720-9763f20f7351b4f41c81a7d6.svg?style=for-the-badge)](https://status.param.me/782558720)
-![Update Status](https://img.shields.io/endpoint.svg?url=https://thakkaha.dev.fast.sheridanc.on.ca/pme/meme/status/&style=for-the-badge)
+[![Update Status](https://img.shields.io/endpoint.svg?url=https://thakkaha.dev.fast.sheridanc.on.ca/pme/meme/status/&style=for-the-badge)](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py)
 
 **MemeAdviser** is a reddit bot that analyzes the market at [r/MemeEconomy](https://www.reddit.com/r/MemeEconomy) and gives insightful information.
 
@@ -19,6 +19,6 @@ The bot lets users subscribe to it. When it finds a promising meme, it messages 
  - [x] ~~Calculate the current break-even point of an investment when summoned with ```!breakeven```~~
  - [ ] Monitor more of the front page (like top 5 or top 10 on hot)
  - [ ] ~~Allow users to ```!watch``` a post, which will send updates to the user for the next 4 hours~~
- - [ ] Automatically update the formula the [official formula](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py)
+ - [ ] Automatically update the formula to the [official formula](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py)
 
  \*commands will not be added because it creates too much spam
