@@ -1,7 +1,7 @@
-import praw
-import re
 from datetime import datetime
+import re
 import time
+import praw
 import algorithm
 import constants
 
