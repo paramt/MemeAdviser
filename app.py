@@ -8,10 +8,10 @@ import constants
 reddit = praw.Reddit('MemeAdviser')
 
 with open("../replied.txt", "r") as f:
-    replied = list(filter(None, f.read().split("\n")))
+    replied = f.read().splitlines()
 
 with open("../subscribed.txt", "r") as f:
-    subscribed = list(filter(None, f.read().split("\n")))
+    subscribed = f.read().splitlines()
 
 subreddit = reddit.subreddit("MemeEconomy")
 post_subreddit = reddit.subreddit("InsiderMemeTrading")
