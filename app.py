@@ -14,21 +14,21 @@ with open("../subscribed.txt", "r") as f:
     subscribed = f.read().splitlines()
 
 subreddit = reddit.subreddit("MemeEconomy")
-post_subreddit = reddit.subreddit("InsiderMemeTrading")
 submissions = subreddit.hot()
+
+# Find the top submission that isn't stickied
 submission = next(submissions)
 
 while submission.stickied:
     submission = submissions.next()
 
-# Find out how old the post is
-minutes = int(round((time.time() - submission.created_utc) / 60))
+# Find out how old the submission is
+time = int(round((time.time() - submission.created_utc) / 60))
 
-# Store time in hours
-if minutes >= 60:
-    minutes = str(minutes // 60) + "h " + str(minutes % 60) + "min"
+if time >= 60:
+    time = str(time // 60) + "h " + str(time % 60) + "min"
 else:
-    minutes = str(round((time.time() - submission.created_utc) / 60)) + " minutes"
+    time = str(round((time.time() - submission.created_utc) / 60)) + " time"
 
 if submission.id not in replied:
     try:
@@ -40,7 +40,7 @@ if submission.id not in replied:
 
         # Post to r/InsiderMemeTrading
         if submission.score < constants.Thresholds.submission:
-            post_subreddit.submit(title=constants.Messages.submission.format(upvotes=submission.score, break_even=algorithm.break_even(submission.score)), url="https://reddit.com" + submission.permalink)
+            reddit.subreddit("InsiderMemeTrading").submit(title=constants.Messages.submission.format(upvotes=submission.score, break_even=algorithm.break_even(submission.score)), url="https://reddit.com" + submission.permalink)
 
         # Send PM to subscribers
         if submission.score < constants.Thresholds.pm:
@@ -49,7 +49,7 @@ if submission.id not in replied:
 
         # Comment on r/MemeEconomy post
         if submission.score < constants.Thresholds.comment:
-            submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=str(datetime.utcfromtimestamp(submission.created_utc).strftime('%B %d %H:%M:%S')), min=minutes, break_even=algorithm.break_even(submission.score)))
+            submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
 
     except:
         pass
