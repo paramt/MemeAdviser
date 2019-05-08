@@ -1,6 +1,7 @@
 # MemeAdviser <img height=44 src=docs/logo.png align=left>
-[![Uptime](https://img.shields.io/uptimerobot/ratio/m782558720-9763f20f7351b4f41c81a7d6.svg?style=for-the-badge)](https://status.param.me/782558720)
-[![Update Status](https://img.shields.io/endpoint.svg?url=https://thakkaha.dev.fast.sheridanc.on.ca/pme/meme/status/&style=for-the-badge)](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py)
+[![CodeFactor](https://www.codefactor.io/repository/github/paramt/memeadviser/badge)](https://www.codefactor.io/repository/github/paramt/memeadviser)
+[![Uptime](https://img.shields.io/uptimerobot/ratio/m782558720-9763f20f7351b4f41c81a7d6.svg?style=flat)](https://status.param.me/782558720)
+[![Update Status](https://img.shields.io/endpoint.svg?url=https://thakkaha.dev.fast.sheridanc.on.ca/pme/meme/status/&style=flat)](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py)
 
 **MemeAdviser** is a reddit bot that analyzes the market at [r/MemeEconomy](https://www.reddit.com/r/MemeEconomy) and gives insightful information.
 
