@@ -17,8 +17,10 @@ def main(usePreset: bool, thresholds=constants.Thresholds, filepath="../data/"):
 		reddit = praw.Reddit('MemeAdviser')
 	else:
 		reddit = praw.Reddit(client_id=os.environ['CLIENT_ID'],
-                             client_secret=os.environ['CLIENT_SECRET'],
-                             user_agent=os.environ['USER_AGENT'])
+							 client_secret=os.environ['CLIENT_SECRET'],
+							 user_agent=os.environ['USER_AGENT'],
+							 username=os.environ['USERNAME'],
+							 password=os.environ['PASSWORD'])
 
 	with open(repliedfp, "r") as f:
 		replied = f.read().splitlines()
