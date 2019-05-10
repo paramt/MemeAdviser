@@ -7,7 +7,11 @@ import praw
 from src import algorithm
 from src import constants
 
-def main(usePreset: bool, thresholds=constants.Thresholds):
+def main(usePreset: bool, thresholds=constants.Thresholds, filepath="../data/"):
+
+	# Store data filepaths
+	repliedfp = filepath + "replied.txt"
+	subscribedfp = filepath + "subscribed.txt"
 
 	if(usePreset):
 		reddit = praw.Reddit('MemeAdviser')
@@ -16,10 +20,10 @@ def main(usePreset: bool, thresholds=constants.Thresholds):
                              client_secret=os.environ['CLIENT_SECRET'],
                              user_agent=os.environ['USER_AGENT'])
 
-	with open("../data/replied.txt", "r") as f:
+	with open(repliedfp, "r") as f:
 		replied = f.read().splitlines()
 
-	with open("../data/subscribed.txt", "r") as f:
+	with open(subscribedfp, "r") as f:
 		subscribed = f.read().splitlines()
 
 	subreddit = reddit.subreddit("MemeEconomy")
@@ -43,7 +47,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds):
 		try:
 			# Update replied.txt
 			replied.append(submission.id)
-			with open("../data/replied.txt", "w") as f:
+			with open(repliedfp, "w") as f:
 				for post_id in replied:
 					f.write(post_id + "\n")
 		except IOError as e:
@@ -78,7 +82,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds):
 		if re.search("unsubscribe", message.body, re.IGNORECASE) or re.search("unsubscribe", message.subject, re.IGNORECASE):
 			if message.author.name in subscribed:
 				subscribed.remove(message.author.name)
-				with open("../data/subscribed.txt", "w") as f:
+				with open(subscribedfp, "w") as f:
 					for user in subscribed:
 						f.write(user + "\n")
 				message.reply("You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
@@ -89,7 +93,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds):
 		elif re.search("subscribe", message.body, re.IGNORECASE) or re.search("subscribe", message.subject, re.IGNORECASE):
 			if message.author.name not in subscribed:
 				subscribed.append(message.author.name)
-				with open("../data/subscribed.txt", "w") as f:
+				with open(subscribedfp, "w") as f:
 					for user in subscribed:
 						f.write(user + "\n")
 				message.reply("You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
