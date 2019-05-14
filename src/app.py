@@ -4,8 +4,8 @@ import re
 import time as t
 import praw
 
-from src import algorithm
-from src import constants
+import algorithm
+import constants
 
 def main(usePreset: bool, thresholds=constants.Thresholds, filepath="../data/"):
 

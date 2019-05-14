@@ -5,4 +5,4 @@ test = Thresholds()
 test.comment, test.submission, test.pm = (0, 0, 0)
 
 def test_app():
-	app.main(False, test, "data/")
+	app.main(False, test, "../data/")
