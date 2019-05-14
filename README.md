@@ -32,7 +32,7 @@ Create a new issue before working on a PR to prevent wasted effort
     * Choose **personal use script**
     * Add a name and description
     * Click **create app** and copy the ID and secret
-- Create a new file named `praw.ini`
+- Create `src/praw.ini` 
 - Make a new configuration that looks like this
 ```ini
 [MemeAdviser]
@@ -42,3 +42,6 @@ username=[YOUR REDDIT USERNAME]
 password=[YOUR REDDIT PASSWORD]
 user_agent=MemeAdviser Dev 1.0
 ```
+
+#### 4. Run tests
+Run `python -m pytest ../tests -v` from inside `src` to run the bot without replying to submissions on reddit.
