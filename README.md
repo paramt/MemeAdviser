@@ -1,4 +1,6 @@
-# MemeAdviser <img height=44 src=docs/logo.png align=left>
+# MemeAdviser [<img height=44 src=docs/logo.png align=left>](https://www.param.me/MemeAdviser)
+[![Build Status](https://travis-ci.org/paramt/MemeAdviser.svg?branch=master)](https://travis-ci.org/paramt/MemeAdviser)
+[![Codecov](https://codecov.io/gh/paramt/memeadviser/branch/master/graph/badge.svg)](https://codecov.io/gh/paramt/MemeAdviser)<br>
 [![CodeFactor](https://www.codefactor.io/repository/github/paramt/memeadviser/badge)](https://www.codefactor.io/repository/github/paramt/memeadviser)
 [![Uptime](https://img.shields.io/uptimerobot/ratio/m782558720-9763f20f7351b4f41c81a7d6.svg?style=flat)](https://status.param.me/782558720)
 [![Update Status](https://img.shields.io/endpoint.svg?url=https://thakkaha.dev.fast.sheridanc.on.ca/pme/meme/status/&style=flat)](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py)
@@ -32,10 +34,8 @@ Create a new issue before working on a PR to prevent wasted effort
     * Choose **personal use script**
     * Add a name and description
     * Click **create app** and copy the ID and secret
-- Create `src/praw.ini` 
-- Make a new configuration that looks like this
+- Export the following environment variables:
 ```ini
-[MemeAdviser]
 client_id=[YOUR APP ID]
 client_secret=[YOUR APP SECRET]
 username=[YOUR REDDIT USERNAME]
