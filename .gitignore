@@ -1,3 +1,4 @@
 __pycache__/
 praw.ini
 .pytest_cache
+*.txt
