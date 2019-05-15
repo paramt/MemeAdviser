@@ -1,11 +1,10 @@
 import math
-from fastnumbers import fast_float
 
 
 def calculate(new, old, net_worth):
-	new = fast_float(new)
-	old = fast_float(old)
-	net_worth = fast_float(net_worth)
+	new = float(new)
+	old = float(old)
+	net_worth = float(net_worth)
 
 	# Treat anything below 0 upvotes as 0 upvotes
 	if old < 0:
@@ -44,7 +43,7 @@ def calculate(new, old, net_worth):
 
 def sigmoid(x, maxvalue, midpoint, steepness):
 	arg = -(steepness * (x - midpoint))
-	y = fast_float(maxvalue) / (1 + math.exp(arg))
+	y = float(maxvalue) / (1 + math.exp(arg))
 	return y
 
 
@@ -63,7 +62,7 @@ def sigmoid_steepness(old):
 
 
 def linear_interpolate(x, x_0, x_1, y_0, y_1):
-	m = (y_1 - y_0) / fast_float(x_1 - x_0)
+	m = (y_1 - y_0) / float(x_1 - x_0)
 	c = y_0
 	y = (m * x) + c
 	return y
