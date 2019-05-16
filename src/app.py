@@ -4,8 +4,9 @@ import re
 import time as t
 import praw
 
-import algorithm
-import constants
+import src.algorithm as algorithm
+import src.constants as constants
+
 
 def main(usePreset: bool, thresholds=constants.Thresholds):
 	if(usePreset):

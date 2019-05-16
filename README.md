@@ -44,4 +44,4 @@ user_agent=MemeAdviser Dev 1.0
 ```
 
 #### 4. Run tests
-Run `python -m pytest ../tests -v` from inside `src` to run the bot without replying to submissions on reddit.
+Run `pytest -v` to run the bot without replying to submissions on reddit.
