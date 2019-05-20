@@ -1,13 +1,13 @@
 # MemeAdviser [<img height=44 src=docs/logo.png align=left>](https://www.param.me/MemeAdviser)
 [![Build Status](https://travis-ci.org/paramt/MemeAdviser.svg?branch=master)](https://travis-ci.org/paramt/MemeAdviser)
-[![Codecov](https://codecov.io/gh/paramt/memeadviser/branch/master/graph/badge.svg)](https://codecov.io/gh/paramt/MemeAdviser)<br>
+[![Codecov](https://codecov.io/gh/paramt/memeadviser/branch/master/graph/badge.svg)](https://codecov.io/gh/paramt/MemeAdviser)
 [![CodeFactor](https://www.codefactor.io/repository/github/paramt/memeadviser/badge)](https://www.codefactor.io/repository/github/paramt/memeadviser)
 [![Uptime](https://img.shields.io/uptimerobot/ratio/m782558720-9763f20f7351b4f41c81a7d6.svg?style=flat)](https://status.param.me/782558720)
 [![Update Status](https://img.shields.io/endpoint.svg?url=https://thakkaha.dev.fast.sheridanc.on.ca/pme/meme/status/&style=flat)](https://github.com/MemeInvestor/memeinvestor_bot/blob/master/src/formula.py)
 
-**MemeAdviser** is a reddit bot that analyzes the market at [r/MemeEconomy](https://www.reddit.com/r/MemeEconomy) and gives insightful information.
+**MemeAdviser** is a reddit bot that analyzes the market at [r/MemeEconomy](https://www.reddit.com/r/MemeEconomy) and gives insightful information on investments.
 
-### Features
+## Features
 #### Logs the front page
 As soon as a post hits #1 on [the front page](https://www.reddit.com/r/MemeEconomy/hot), it records the time it took and the amount of upvotes with which it reached there. Everything it's collected and recorded can be found [here](https://www.reddit.com/u/MemeAdviser/comments).
 
@@ -17,8 +17,8 @@ If the post has a low number of upvotes at the time, it posts the link to [r/Ins
 #### Subscriptions
 The bot lets users subscribe to it. When it finds a promising meme, it messages the link to everyone that's subscribed. It also provides a more in-depth analysis of the meme. Redditors can subscribe to the bot by sending a private message to [u/MemeAdviser](https://reddit.com/u/MemeAdviser) with the text "Subscribe" as the subject or body.
 
-### Development
-Create a new issue before working on a PR to prevent wasted effort
+## Development
+Just remember to create a new issue before working on a PR
 
 #### 1. Clone the repo
  - `git clone https://github.com/paramt/MemeAdviser.git`
