@@ -7,8 +7,7 @@ import praw
 import src.algorithm as algorithm
 import src.constants as constants
 
-
-def main(usePreset: bool, thresholds=constants.Thresholds):
+def login(usePreset):
 	if(usePreset):
 		reddit = praw.Reddit('MemeAdviser')
 	else:
@@ -17,13 +16,9 @@ def main(usePreset: bool, thresholds=constants.Thresholds):
 							 user_agent=os.environ['USER_AGENT'],
 							 username=os.environ['USERNAME'],
 							 password=os.environ['PASSWORD'])
+	return reddit
 
-	with open("replied.txt", "r") as f:
-		replied = f.read().splitlines()
-
-	with open("subscribed.txt", "r") as f:
-		subscribed = f.read().splitlines()
-
+def find_top_submission(reddit):
 	subreddit = reddit.subreddit("MemeEconomy")
 	submissions = subreddit.hot()
 
@@ -41,35 +36,9 @@ def main(usePreset: bool, thresholds=constants.Thresholds):
 	else:
 		time = str(round((time.time() - submission.created_utc) / 60)) + " time"
 
-	if submission.id not in replied:
-		try:
-			# Update replied.txt
-			replied.append(submission.id)
-			with open("replied.txt", "w") as f:
-				for post_id in replied:
-					f.write(post_id + "\n")
-		except IOError as e:
-			print("IOError:")
-			print(e)
+	return submission, time
 
-		try:
-			# Post to r/InsiderMemeTrading
-			if submission.score < thresholds.submission:
-				reddit.subreddit("InsiderMemeTrading").submit(title=constants.Messages.submission.format(upvotes=submission.score, break_even=algorithm.break_even(submission.score)), url="https://reddit.com" + submission.permalink)
-
-			# Send PM to subscribers
-			if submission.score < thresholds.pm:
-				for user in subscribed:
-					reddit.redditor(user).message("MemeEconomy Update", constants.Messages.pm.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
-
-			# Comment on r/MemeEconomy post
-			if submission.score < thresholds.comment:
-				submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
-
-		except praw.exceptions.PRAWException as e:
-			print("PRAW Error:")
-			print(e)
-
+def update_subscriptions(reddit, subscribed):
 	unread_messages = []
 
 	# Go through each unread message
@@ -100,6 +69,47 @@ def main(usePreset: bool, thresholds=constants.Thresholds):
 
 	# Mark all messages as read
 	reddit.inbox.mark_read(unread_messages)
+
+def main(usePreset: bool, thresholds=constants.Thresholds):
+	reddit = login(usePreset)
+	submission, time = find_top_submission(reddit)
+
+	with open("replied.txt", "r") as f:
+		replied = f.read().splitlines()
+
+	with open("subscribed.txt", "r") as f:
+		subscribed = f.read().splitlines()
+
+	if submission.id not in replied:
+		try:
+			# Update replied.txt
+			replied.append(submission.id)
+			with open("replied.txt", "w") as f:
+				for post_id in replied:
+					f.write(post_id + "\n")
+		except IOError as e:
+			print("IOError:")
+			print(e)
+
+		try:
+			# Post to r/InsiderMemeTrading
+			if submission.score < thresholds.submission:
+				reddit.subreddit("InsiderMemeTrading").submit(title=constants.Messages.submission.format(upvotes=submission.score, break_even=algorithm.break_even(submission.score)), url="https://reddit.com" + submission.permalink)
+
+			# Send PM to subscribers
+			if submission.score < thresholds.pm:
+				for user in subscribed:
+					reddit.redditor(user).message("MemeEconomy Update", constants.Messages.pm.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
+
+			# Comment on r/MemeEconomy post
+			if submission.score < thresholds.comment:
+				submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
+
+		except praw.exceptions.PRAWException as e:
+			print("PRAW Error:")
+			print(e)
+
+	update_subscriptions(reddit, subscribed)
 
 if __name__ == "__main__":
     main(True)
