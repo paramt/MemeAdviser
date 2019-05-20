@@ -1,5 +1,5 @@
 class Thresholds:
-	submission = 800
+	submission = 600
 	comment = 1000
 	pm = 1000
 
