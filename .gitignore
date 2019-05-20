@@ -3,3 +3,4 @@ praw.ini
 .pytest_cache
 .coverage
 *.txt
+*.log
