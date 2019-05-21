@@ -45,6 +45,11 @@ def find_top_submission(reddit):
 	return submission, time
 
 def update_subscriptions(reddit, subscribed):
+	def update_file():
+		with open("subscribed.txt", "w") as f:
+			for user in subscribed:
+				f.write(user + "\n")
+
 	unread_messages = []
 
 	# Go through each unread message
@@ -55,10 +60,7 @@ def update_subscriptions(reddit, subscribed):
 		if re.search("unsubscribe", message.body, re.IGNORECASE) or re.search("unsubscribe", message.subject, re.IGNORECASE):
 			if message.author.name in subscribed:
 				subscribed.remove(message.author.name)
-				with open("subscribed.txt", "w") as f:
-					for user in subscribed:
-						f.write(user + "\n")
-
+				update_file()
 				message.reply("You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
 				logging.info("Removed {} from subscribed.txt".format(message.author.name))
 
@@ -69,10 +71,7 @@ def update_subscriptions(reddit, subscribed):
 		elif re.search("subscribe", message.body, re.IGNORECASE) or re.search("subscribe", message.subject, re.IGNORECASE):
 			if message.author.name not in subscribed:
 				subscribed.append(message.author.name)
-				with open("subscribed.txt", "w") as f:
-					for user in subscribed:
-						f.write(user + "\n")
-
+				update_file()
 				message.reply("You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
 				logging.info("Added {} to subscribed.txt".format(message.author.name))
 
