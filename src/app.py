@@ -9,9 +9,10 @@ import src.algorithm as algorithm
 import src.constants as constants
 
 # Configure logger
-logging.basicConfig(filename="memeadviser.log",
-					level=logging.INFO,
-					format="%(levelname)s: %(message)s at %(asctime)s")
+def setup_logger(logfile):
+	logging.basicConfig(filename = logfile,
+						level = logging.INFO,
+						format = "%(levelname)s: %(message)s at %(asctime)s")
 
 def login(usePreset):
 	if(usePreset):
@@ -80,7 +81,8 @@ def update_subscriptions(reddit, subscribed):
 	# Mark all messages as read
 	reddit.inbox.mark_read(unread_messages)
 
-def main(usePreset: bool, thresholds=constants.Thresholds):
+def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOGFILE):
+	setup_logger(logfile)
 	reddit = login(usePreset)
 	logging.debug("Sucessfully logged into Reddit account")
 
