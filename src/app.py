@@ -9,9 +9,9 @@ import src.algorithm as algorithm
 import src.constants as constants
 
 # Configure logger
-logging.basicConfig(filename="memeadviser.log",
-					level=logging.INFO,
-					format="%(levelname)s: %(message)s at %(asctime)s")
+logging.basicConfig(filename = constants.LOGFILE,
+					level = logging.INFO,
+					format = "%(levelname)s: %(message)s at %(asctime)s")
 
 def login(usePreset):
 	if(usePreset):
