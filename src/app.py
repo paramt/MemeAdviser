@@ -47,8 +47,7 @@ def find_top_submission(reddit):
 def update_subscriptions(reddit, subscribed):
 	def update_file():
 		with open("subscribed.txt", "w") as f:
-			for user in subscribed:
-				f.write(user + "\n")
+			[f.write(user + "\n") for user in subscribed]
 
 	unread_messages = []
 
@@ -102,11 +101,13 @@ def main(usePreset: bool, thresholds=constants.Thresholds):
 			with open("replied.txt", "w") as f:
 				for post_id in replied:
 					f.write(post_id + "\n")
-			logging.info("Updated replied.txt")
 
 		except IOError as e:
 			logging.critical("An error occured while updating replied.txt: {} Exiting program".format(str(e)))
 			exit()
+
+		else:
+			logging.info("Updated replied.txt")
 
 		try:
 			# Post to r/InsiderMemeTrading
