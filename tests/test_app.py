@@ -8,4 +8,4 @@ def test_app():
 	with open("replied.txt", "w+"), open("subscribed.txt", "w+"):
 		pass
 
-	app.main(False, test)
+	app.main(False, test, "memeadviser.log")

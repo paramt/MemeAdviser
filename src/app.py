@@ -80,7 +80,7 @@ def update_subscriptions(reddit, subscribed):
 	# Mark all messages as read
 	reddit.inbox.mark_read(unread_messages)
 
-def main(usePreset: bool, thresholds=constants.Thresholds):
+def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOGFILE):
 	reddit = login(usePreset)
 	logging.debug("Sucessfully logged into Reddit account")
 
