@@ -47,7 +47,7 @@ def find_top_submission(reddit):
 def update_subscriptions(reddit, subscribed):
 	def update_file():
 		with open("subscribed.txt", "w") as f:
-			[f.write(user + "\n") for user in subscribed]
+			f.write("\n".join(subscribed) + "\n")
 
 	unread_messages = []
 
