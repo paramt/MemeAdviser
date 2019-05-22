@@ -1,0 +1,61 @@
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgb(11, 122, 70)
+}
+
+h1{
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5em;
+}
+
+.container{
+    padding: 20px;
+    background-color: rgb(41, 41, 41);
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    border-radius: 10px;
+}
+
+#terminal{
+    width: 65vw;
+    overflow-x: scroll;
+    margin: 30px;
+}
+
+#button{
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+}
+
+#button:focus{
+    outline: none;
+}
+
+#button:hover{
+    cursor: pointer;
+    background-color: rgb(59, 59, 59);
+}
+
+/* Hide scrollbar  */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+@media only screen and (max-width: 1200px) {
+    #terminal{
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #terminal{
+        width: 90vw;
+    }
+}
