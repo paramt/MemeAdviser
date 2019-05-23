@@ -35,8 +35,10 @@ function highlightText(log){
     }
 
     coloredEntries.push(coloredEntry);
-    document.getElementById("terminal").innerHTML = coloredEntries.join("\n");
   });
+
+  coloredEntries.pop();
+  document.getElementById("terminal").innerHTML = coloredEntries.join("\n");
 }
 
 var xhttp=new XMLHttpRequest();
