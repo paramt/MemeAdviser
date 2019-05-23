@@ -127,7 +127,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 				submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
 				logging.info("Commented on r/MemeEconomy submission")
 
-		except praw.exceptions.PRAWException as e:
+		except Exception as e:
 			logging.critical("An error occured while replying to the submission: {} Exiting program".format(str(e)))
 			exit()
 
