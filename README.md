@@ -45,3 +45,9 @@ user_agent=MemeAdviser Dev 1.0
 
 #### 4. Run tests
 Run `pytest -v` to run the bot without replying to submissions on reddit.
+
+## Production
+The server executes `run.sh` every minute using **Python 3.6.7** and generates an internal log file. The log is uploaded online every 5 minutes and can be found here:
+
+- [Online](https://www.param.me/MemeAdviser/log)
+- [Raw](https://raw.githubusercontent.com/wiki/paramt/MemeAdviser/memeadviser.log)
