@@ -25,8 +25,14 @@ h1{
 
 #terminal{
     width: 65vw;
-    overflow-x: scroll;
     margin: 15px;
+
+    /* Wrap long lines */
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }
 
 #button{
