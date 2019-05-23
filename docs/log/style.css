@@ -12,6 +12,7 @@ h1{
     color: white;
     font-family: 'Poppins', sans-serif;
     font-size: 2.5em;
+    text-align: center;
 }
 
 .container{
@@ -25,13 +26,14 @@ h1{
 #terminal{
     width: 65vw;
     overflow-x: scroll;
-    margin: 30px;
+    margin: 15px;
 }
 
 #button{
     border: none;
     font-family: 'Poppins', sans-serif;
     font-size: 1.2em;
+    margin: 15px;
 }
 
 #button:focus{
@@ -57,5 +59,15 @@ h1{
 @media only screen and (max-width: 900px) {
     #terminal{
         width: 90vw;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #terminal{
+        border-radius: 0;
+    }
+
+    h1{
+        font-size: 2em;
     }
 }
