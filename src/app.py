@@ -23,16 +23,21 @@ def setup_logger(logfile):
 
 	return logger
 
-def login(usePreset):
-	if(usePreset):
-		reddit = praw.Reddit('MemeAdviser')
+def login(usePreset, logger):
+	try:
+		if(usePreset):
+			reddit = praw.Reddit('MemeAdviser')
+		else:
+			reddit = praw.Reddit(client_id=os.environ['CLIENT_ID'],
+								client_secret=os.environ['CLIENT_SECRET'],
+								user_agent=os.environ['USER_AGENT'],
+								username=os.environ['USERNAME'],
+								password=os.environ['PASSWORD'])
+	except Exception as e:
+		logger.critical("An error occured while attempting to log in: {} Exiting program".format(str(e)))
+		exit()
 	else:
-		reddit = praw.Reddit(client_id=os.environ['CLIENT_ID'],
-							 client_secret=os.environ['CLIENT_SECRET'],
-							 user_agent=os.environ['USER_AGENT'],
-							 username=os.environ['USERNAME'],
-							 password=os.environ['PASSWORD'])
-	return reddit
+		return reddit
 
 def find_top_submission(reddit):
 	subreddit = reddit.subreddit("MemeEconomy")
@@ -92,7 +97,7 @@ def update_subscriptions(reddit, subscribed, logger):
 
 def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOGFILE):
 	logger = setup_logger(logfile)
-	reddit = login(usePreset)
+	reddit = login(usePreset, logger)
 
 	submission, time = find_top_submission(reddit)
 
