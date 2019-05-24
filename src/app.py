@@ -11,7 +11,7 @@ import src.constants as constants
 def setup_logger(logfile):
 	logger = logging.getLogger(__name__)
 	logger.setLevel(logging.DEBUG)
-	formatter = logging.Formatter("%(levelname)s %(asctime)s: %(message)s")
+	formatter = logging.Formatter("%(levelname)-8s %(asctime)s: %(message)s")
 	file_handler = logging.FileHandler(logfile)
 	file_handler.setFormatter(formatter)
 	logger.addHandler(file_handler)
@@ -19,7 +19,7 @@ def setup_logger(logfile):
 
 	logging.basicConfig(filename = logfile,
 						level = logging.INFO,
-						format = "%(levelname)s %(asctime)s: %(message)s")
+						format = "%(levelname)-8s %(asctime)s: %(message)s")
 
 	return logger
 

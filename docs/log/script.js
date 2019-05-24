@@ -10,28 +10,24 @@ function highlightText(log){
   log = log.split("\n");
 
   log.forEach(function(entry){
-    if(entry.includes("CRITICAL: ")){
+    if(entry.includes("CRITICAL ")){
       coloredEntry = red + entry + "</span>";
     }
 
-    if(entry.includes("ERROR: ")){
+    if(entry.includes("ERROR ")){
       coloredEntry = orange + entry + "</span>";
     }
 
-    if(entry.includes("WARNING: ")){
+    if(entry.includes("WARNING ")){
       coloredEntry = yellow + entry + "</span>";
     }
 
-    if(entry.includes("INFO: ")){
+    if(entry.includes("INFO ")){
       coloredEntry = white + entry + "</span>";
     }
 
-    if(entry.includes("DEBUG: ")){
+    if(entry.includes("DEBUG ")){
       coloredEntry = gray + entry + "</span>";
-    }
-
-    if(entry.includes("WARNING: ")){
-      coloredEntry = yellow + entry + "</span>";
     }
 
     coloredEntries.push(coloredEntry);
