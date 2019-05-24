@@ -4,7 +4,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     background-color: rgb(11, 122, 70)
 }
 
@@ -26,6 +26,8 @@ h1{
 #terminal{
     width: 65vw;
     margin: 15px;
+    height: 70vh;
+    overflow-y: scroll;
 
     /* Wrap long lines */
     white-space: pre-wrap;
@@ -75,5 +77,17 @@ h1{
 
     h1{
         font-size: 2em;
+    }
+}
+
+@media only screen and (max-height: 900px) {
+    #terminal{
+        height: 60vh;
+    }
+}
+
+@media only screen and (max-height: 700px) {
+    #terminal{
+        height: 50vh;
     }
 }
