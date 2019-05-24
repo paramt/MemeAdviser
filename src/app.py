@@ -9,9 +9,19 @@ import src.constants as constants
 
 # Configure logger
 def setup_logger(logfile):
+	logger = logging.getLogger(__name__)
+	logger.setLevel(logging.DEBUG)
+	formatter = logging.Formatter("%(levelname)s %(asctime)s: %(message)s")
+	file_handler = logging.FileHandler(logfile)
+	file_handler.setFormatter(formatter)
+	logger.addHandler(file_handler)
+	logger.propagate = False
+
 	logging.basicConfig(filename = logfile,
 						level = logging.INFO,
-						format = "%(levelname)s: %(message)s at %(asctime)s")
+						format = "%(levelname)s %(asctime)s: %(message)s")
+
+	return logger
 
 def login(usePreset):
 	if(usePreset):
@@ -44,7 +54,7 @@ def find_top_submission(reddit):
 
 	return submission, time
 
-def update_subscriptions(reddit, subscribed):
+def update_subscriptions(reddit, subscribed, logger):
 	def update_file():
 		with open("subscribed.txt", "w") as f:
 			f.write("\n".join(subscribed) + "\n")
@@ -61,7 +71,7 @@ def update_subscriptions(reddit, subscribed):
 				subscribed.remove(message.author.name)
 				update_file()
 				message.reply("You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
-				logging.info("Removed {} from subscribed.txt".format(message.author.name))
+				logger.info("Removed {} from subscribed.txt".format(message.author.name))
 
 			else:
 				message.reply("You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
@@ -72,7 +82,7 @@ def update_subscriptions(reddit, subscribed):
 				subscribed.append(message.author.name)
 				update_file()
 				message.reply("You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
-				logging.info("Added {} to subscribed.txt".format(message.author.name))
+				logger.info("Added {} to subscribed.txt".format(message.author.name))
 
 			else:
 				message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
@@ -81,9 +91,8 @@ def update_subscriptions(reddit, subscribed):
 	reddit.inbox.mark_read(unread_messages)
 
 def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOGFILE):
-	setup_logger(logfile)
+	logger = setup_logger(logfile)
 	reddit = login(usePreset)
-	logging.debug("Sucessfully logged into Reddit account")
 
 	submission, time = find_top_submission(reddit)
 
@@ -94,7 +103,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 		subscribed = f.read().splitlines()
 
 	if submission.id not in replied:
-		logging.info("New submission found ({})".format(submission.id))
+		logger.info("New submission found ({})".format(submission.id))
 
 		try:
 			# Update replied.txt
@@ -104,34 +113,35 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 					f.write(post_id + "\n")
 
 		except IOError as e:
-			logging.critical("An error occured while updating replied.txt: {} Exiting program".format(str(e)))
+			logger.critical("An error occured while updating replied.txt: {} Exiting program".format(str(e)))
 			exit()
 
 		else:
-			logging.info("Updated replied.txt")
+			logger.info("Updated replied.txt")
 
 		try:
 			# Post to r/InsiderMemeTrading
 			if submission.score < thresholds.submission:
 				reddit.subreddit("InsiderMemeTrading").submit(title=constants.Messages.submission.format(upvotes=submission.score, break_even=algorithm.break_even(submission.score)), url="https://reddit.com" + submission.permalink)
-				logging.info("Posted link to submission on r/InsiderMemeTrading")
+				logger.info("Posted link to submission on r/InsiderMemeTrading")
 
 			# Send PM to subscribers
 			if submission.score < thresholds.pm:
+				logger.debug("Attempting to send PMs to {} subscribers".format(len(subscribed)))
 				for user in subscribed:
 					reddit.redditor(user).message("MemeEconomy Update", constants.Messages.pm.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
-				logging.info("Sent PMs to {} subscribers".format(len(subscribed)))
+				logger.info("Sent PMs to {} subscribers".format(len(subscribed)))
 
 			# Comment on r/MemeEconomy post
 			if submission.score < thresholds.comment:
 				submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
-				logging.info("Commented on r/MemeEconomy submission")
+				logger.info("Commented on r/MemeEconomy submission")
 
 		except Exception as e:
-			logging.critical("An error occured while replying to the submission: {} Exiting program".format(str(e)))
+			logger.critical("An error occured while replying to the submission: {} Exiting program".format(str(e)))
 			exit()
 
-	update_subscriptions(reddit, subscribed)
+	update_subscriptions(reddit, subscribed, logger)
 
 if __name__ == "__main__":
     main(True)
