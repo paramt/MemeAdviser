@@ -34,6 +34,7 @@ function highlightText(log){
   });
 
   coloredEntries.pop();
+  coloredEntries.reverse();
   document.getElementById("terminal").innerHTML = coloredEntries.join("\n");
 }
 
