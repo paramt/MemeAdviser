@@ -108,7 +108,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 		subscribed = f.read().splitlines()
 
 	if submission.id not in replied:
-		logger.info("New submission found ({})".format(submission.id))
+		logger.info("New submission found ({}) at {} upvotes".format(submission.id, submission.score))
 
 		try:
 			# Update replied.txt
@@ -122,7 +122,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 			exit()
 
 		else:
-			logger.info("Updated replied.txt")
+			logger.debug("Updated replied.txt")
 
 		try:
 			# Post to r/InsiderMemeTrading
@@ -143,8 +143,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 				logger.info("Commented on r/MemeEconomy submission")
 
 		except Exception as e:
-			logger.critical("An error occured while replying to the submission: {} Exiting program".format(str(e)))
-			exit()
+			logger.error("An error occured while replying to submission ({}): {}".format(submission.id, str(e)))
 
 	update_subscriptions(reddit, subscribed, logger)
 
