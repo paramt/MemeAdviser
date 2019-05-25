@@ -26,13 +26,13 @@ def setup_logger(logfile):
 def login(usePreset, logger):
 	try:
 		if(usePreset):
-			reddit = praw.Reddit('MemeAdviser')
+			reddit = praw.Reddit("MemeAdviser")
 		else:
-			reddit = praw.Reddit(client_id=os.environ['CLIENT_ID'],
-								client_secret=os.environ['CLIENT_SECRET'],
-								user_agent=os.environ['USER_AGENT'],
-								username=os.environ['USERNAME'],
-								password=os.environ['PASSWORD'])
+			reddit = praw.Reddit(client_id=os.environ["CLIENT_ID"],
+								client_secret=os.environ["CLIENT_SECRET"],
+								user_agent=os.environ["USER_AGENT"],
+								username=os.environ["USERNAME"],
+								password=os.environ["PASSWORD"])
 	except Exception as e:
 		logger.critical("An error occured while attempting to log in: {} Exiting program".format(str(e)))
 		exit()
