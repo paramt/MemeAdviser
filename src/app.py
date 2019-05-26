@@ -130,17 +130,17 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 				reddit.subreddit("InsiderMemeTrading").submit(title=constants.Messages.submission.format(upvotes=submission.score, break_even=algorithm.break_even(submission.score)), url="https://reddit.com" + submission.permalink)
 				logger.info("Posted link to submission on r/InsiderMemeTrading")
 
+			# Comment on r/MemeEconomy post
+			if submission.score < thresholds.comment:
+				submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
+				logger.info("Commented on r/MemeEconomy submission")
+				
 			# Send PM to subscribers
 			if submission.score < thresholds.pm:
 				logger.debug("Attempting to send PMs to {} subscribers".format(len(subscribed)))
 				for user in subscribed:
 					reddit.redditor(user).message("MemeEconomy Update", constants.Messages.pm.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
 				logger.info("Sent PMs to {} subscribers".format(len(subscribed)))
-
-			# Comment on r/MemeEconomy post
-			if submission.score < thresholds.comment:
-				submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
-				logger.info("Commented on r/MemeEconomy submission")
 
 		except Exception as e:
 			logger.error("An error occured while replying to submission ({}): {}".format(submission.id, str(e)))
