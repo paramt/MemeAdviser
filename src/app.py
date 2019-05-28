@@ -7,7 +7,7 @@ import praw
 import src.algorithm as algorithm
 import src.constants as constants
 
-# Configure logger
+# Configures logger
 def setup_logger(logfile):
 	logger = logging.getLogger(__name__)
 	logger.setLevel(logging.DEBUG)
@@ -23,6 +23,7 @@ def setup_logger(logfile):
 
 	return logger
 
+# Logs into reddit account
 def login(usePreset, logger):
 	try:
 		if(usePreset):
@@ -39,6 +40,7 @@ def login(usePreset, logger):
 	else:
 		return reddit
 
+# Returns the #1 submission on /r/MemeEconomy/hot
 def find_top_submission(reddit):
 	subreddit = reddit.subreddit("MemeEconomy")
 	submissions = subreddit.hot()
@@ -59,6 +61,7 @@ def find_top_submission(reddit):
 
 	return submission, time
 
+# Replies to subscriptions and unsubscriptions
 def update_subscriptions(reddit, subscribed, logger):
 	def update_file():
 		with open("subscribed.txt", "w") as f:
@@ -95,6 +98,7 @@ def update_subscriptions(reddit, subscribed, logger):
 	# Mark all messages as read
 	reddit.inbox.mark_read(unread_messages)
 
+# Appends entry to /r/MemeAdviser wiki page
 def append_to_wiki(reddit, logger, entry):
 	try:
 		page = reddit.subreddit('MemeAdviser').wiki['index']
