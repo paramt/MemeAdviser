@@ -95,6 +95,17 @@ def update_subscriptions(reddit, subscribed, logger):
 	# Mark all messages as read
 	reddit.inbox.mark_read(unread_messages)
 
+def append_to_wiki(reddit, logger, entry):
+	try:
+		page = reddit.subreddit('MemeAdviser').wiki['index']
+		content = page.content_md
+		page.edit(f"{content}\n{entry}", reason="Automated log entry")
+	except Exception as e:
+		logger.critical(f"An error occured while updating r/MemeAdviser wiki: {e} Exiting program")
+		exit()
+	else:
+		logger.debug("Updated /r/MemeAdviser wiki")
+
 def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOGFILE):
 	logger = setup_logger(logfile)
 	reddit = login(usePreset, logger)
@@ -109,6 +120,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 
 	if submission.id not in replied:
 		logger.info(f"New submission found ({submission.id}) at {submission.score} upvotes")
+		append_to_wiki(reddit, logger, f"[This meme]({submission.permalink}) hit #1 within {time} at {submission.score} upvotes")
 
 		try:
 			# Update replied.txt
