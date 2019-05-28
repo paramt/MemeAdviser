@@ -34,7 +34,7 @@ def login(usePreset, logger):
 								username=os.environ["USERNAME"],
 								password=os.environ["PASSWORD"])
 	except Exception as e:
-		logger.critical("An error occured while attempting to log in: {} Exiting program".format(str(e)))
+		logger.critical(f"An error occured while attempting to log in: {e} Exiting program")
 		exit()
 	else:
 		return reddit
@@ -76,7 +76,7 @@ def update_subscriptions(reddit, subscribed, logger):
 				subscribed.remove(message.author.name)
 				update_file()
 				message.reply("You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
-				logger.info("Removed {} from subscribed.txt".format(message.author.name))
+				logger.info(f"Removed {message.author.name} from subscribed.txt")
 
 			else:
 				message.reply("You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
@@ -87,7 +87,7 @@ def update_subscriptions(reddit, subscribed, logger):
 				subscribed.append(message.author.name)
 				update_file()
 				message.reply("You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
-				logger.info("Added {} to subscribed.txt".format(message.author.name))
+				logger.info(f"Added {message.author.name} to subscribed.txt")
 
 			else:
 				message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
@@ -108,7 +108,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 		subscribed = f.read().splitlines()
 
 	if submission.id not in replied:
-		logger.info("New submission found ({}) at {} upvotes".format(submission.id, submission.score))
+		logger.info(f"New submission found ({submission.id}) at {submission.score} upvotes")
 
 		try:
 			# Update replied.txt
@@ -118,7 +118,7 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 					f.write(post_id + "\n")
 
 		except IOError as e:
-			logger.critical("An error occured while updating replied.txt: {} Exiting program".format(str(e)))
+			logger.critical(f"An error occured while updating replied.txt: {e} Exiting program")
 			exit()
 
 		else:
@@ -134,16 +134,16 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 			if submission.score < thresholds.comment:
 				submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
 				logger.info("Commented on r/MemeEconomy submission")
-				
+
 			# Send PM to subscribers
 			if submission.score < thresholds.pm:
-				logger.debug("Attempting to send PMs to {} subscribers".format(len(subscribed)))
+				logger.debug(f"Attempting to send PMs to {len(subscribed)} subscribers")
 				for user in subscribed:
 					reddit.redditor(user).message("MemeEconomy Update", constants.Messages.pm.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
-				logger.info("Sent PMs to {} subscribers".format(len(subscribed)))
+				logger.info(f"Sent PMs to {len(subscribed)} subscribers")
 
 		except Exception as e:
-			logger.error("An error occured while replying to submission ({}): {}".format(submission.id, str(e)))
+			logger.error(f"An error occured while replying to submission ({submission.id}): {e}")
 
 	update_subscriptions(reddit, subscribed, logger)
 
