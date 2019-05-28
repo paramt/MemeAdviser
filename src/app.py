@@ -103,7 +103,7 @@ def append_to_wiki(reddit, logger, entry):
 	try:
 		page = reddit.subreddit('MemeAdviser').wiki['index']
 		content = page.content_md
-		page.edit(f"{content}\n{entry}", reason="Automated log entry")
+		page.edit(f"{content}\n\n{entry}", reason="Automated log entry")
 	except Exception as e:
 		logger.critical(f"An error occured while updating r/MemeAdviser wiki: {e} Exiting program")
 		exit()
