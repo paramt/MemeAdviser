@@ -24,16 +24,17 @@ def setup_logger(logfile):
 	return logger
 
 # Logs into reddit account
-def login(usePreset, logger):
+def login(pytest, logger):
 	try:
-		if(usePreset):
-			reddit = praw.Reddit("MemeAdviser")
-		else:
+		if pytest:
 			reddit = praw.Reddit(client_id=os.environ["CLIENT_ID"],
 								client_secret=os.environ["CLIENT_SECRET"],
 								user_agent=os.environ["USER_AGENT"],
 								username=os.environ["USERNAME"],
 								password=os.environ["PASSWORD"])
+		else:
+			reddit = praw.Reddit("MemeAdviser")
+
 	except Exception as e:
 		logger.critical(f"An error occured while attempting to log in: {e} Exiting program")
 		exit()
@@ -110,9 +111,9 @@ def append_to_wiki(reddit, logger, entry):
 	else:
 		logger.debug("Updated /r/MemeAdviser wiki")
 
-def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOGFILE):
+def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFILE):
 	logger = setup_logger(logfile)
-	reddit = login(usePreset, logger)
+	reddit = login(pytest, logger)
 
 	submission, time = find_top_submission(reddit)
 
@@ -124,7 +125,10 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 
 	if submission.id not in replied:
 		logger.info(f"New submission found ({submission.id}) at {submission.score} upvotes")
-		append_to_wiki(reddit, logger, f"[This meme]({submission.permalink}) hit #1 within {time} at {submission.score} upvotes")
+
+		# Don't update /r/MemeAdviser wiki through pytest
+		if not pytest:
+			append_to_wiki(reddit, logger, f"[This meme]({submission.permalink}) hit #1 within {time} at {submission.score} upvotes")
 
 		try:
 			# Update replied.txt
@@ -164,4 +168,4 @@ def main(usePreset: bool, thresholds=constants.Thresholds, logfile=constants.LOG
 	update_subscriptions(reddit, subscribed, logger)
 
 if __name__ == "__main__":
-    main(True)
+    main(False)
