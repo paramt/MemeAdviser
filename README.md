@@ -9,13 +9,13 @@
 
 ## Features
 #### Logs the front page
-As soon as a post hits #1 on [the front page](https://www.reddit.com/r/MemeEconomy/hot), it records the time it took and the amount of upvotes with which it reached there. Everything it's collected and recorded can be found [here](https://www.reddit.com/u/MemeAdviser/comments).
+As soon as a meme hits #1 on [the front page](https://www.reddit.com/r/MemeEconomy/hot), the bot records the time it took and the amount of upvotes with which it reached there. Everything it's collected and recorded can be found [on the /r/MemeAdviser wiki](https://www.reddit.com/r/MemeAdviser/wiki). Gathering this data lets us gain better insight on front page patterns and lets us fine-tune the bot.
 
-#### Posts promising memes to r/InsiderMemeTrading
-If the post has a low number of upvotes at the time, it posts the link to [r/InsiderMemeTrading](https://www.reddit.com/r/InsiderMemeTrading) and provides the break-even point for any investments made during that time. These can be found [here](https://www.reddit.com/u/MemeAdviser/posts).
+#### Finds investment opportunities
+If the meme has a low number of upvotes at the time, the bot [comments on the meme](https://www.reddit.com/u/MemeAdviser/comments) and provides the break-even point for any investments made during that time. Additionally, it may post a link to [r/InsiderMemeTrading](https://www.reddit.com/r/InsiderMemeTrading).
 
-#### Subscriptions
-The bot lets users subscribe to it. When it finds a promising meme, it messages the link to everyone that's subscribed. It also provides a more in-depth analysis of the meme. Redditors can subscribe to the bot by sending a private message to [u/MemeAdviser](https://reddit.com/u/MemeAdviser) with the text "Subscribe" as the subject or body.
+#### Sends investment opportunities right to your PMs
+The bot also lets users subscribe to it. When it finds a promising meme, it messages the link to everyone that's subscribed. It also provides a more in-depth analysis of the meme. Redditors can subscribe to the bot by sending a private message to [u/MemeAdviser](https://reddit.com/u/MemeAdviser) with the text "Subscribe" as the subject or body.
 
 ## Development
 Just remember to create a new issue before working on a PR
