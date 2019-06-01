@@ -44,10 +44,6 @@ h1{
     margin: 15px;
 }
 
-#button:focus{
-    outline: none;
-}
-
 #button:hover{
     cursor: pointer;
     background-color: rgb(59, 59, 59);
@@ -55,7 +51,7 @@ h1{
 
 /* Hide scrollbar  */
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 0;
 }
 
 @media only screen and (max-width: 1200px) {
