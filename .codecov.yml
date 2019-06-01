@@ -1,7 +1,6 @@
 coverage:
   range: "50...100"
-
-codecov:
+  
   status:
     project: no
     patch: no
