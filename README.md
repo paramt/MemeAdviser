@@ -19,37 +19,9 @@ If the meme has a low number of upvotes at the time, the bot [comments on the me
 #### Sends investment opportunities right to your PMs
 The bot also lets users subscribe to it. When it finds a promising meme, it messages the link to everyone that's subscribed. It also provides a more in-depth analysis of the meme. Redditors can subscribe to the bot by sending a private message to [u/MemeAdviser](https://reddit.com/u/MemeAdviser) with the text "Subscribe" as the subject or body.
 
-## Development
-Just remember to create a new issue before working on a PR
 
-#### 1. Clone the repo
- - `git clone https://github.com/paramt/MemeAdviser.git`
- - `cd MemeAdviser`
-
-#### 2. Install dependencies
-`pip install -r requirements.txt`
-
-#### 3. Configure PRAW
-- Create a new app on Reddit
-    * [Follow this link](https://www.reddit.com/prefs/apps/)
-    * Click **create new app**
-    * Choose **personal use script**
-    * Add a name and description
-    * Click **create app** and copy the ID and secret
-- Export the following environment variables:
-```ini
-client_id=[YOUR APP ID]
-client_secret=[YOUR APP SECRET]
-username=[YOUR REDDIT USERNAME]
-password=[YOUR REDDIT PASSWORD]
-user_agent=MemeAdviser Dev 1.0
-```
-
-#### 4. Run tests
-Run `pytest -v` to run the bot without replying to submissions on reddit.
-
-## Production
-The server executes `run.sh` every minute using **Python 3.6.7** and generates an internal log file. The log is uploaded online every 5 minutes and can be found here:
+## Log
+The logfile is updated every 5 minutes
 
 - [Online](https://www.param.me/MemeAdviser/log)
 - [Raw](https://raw.githubusercontent.com/wiki/paramt/MemeAdviser/memeadviser.log)
