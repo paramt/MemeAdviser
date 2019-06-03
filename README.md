@@ -20,8 +20,15 @@ If the meme has a low number of upvotes at the time, the bot [comments on the me
 The bot also lets users subscribe to it. When it finds a promising meme, it messages the link to everyone that's subscribed. It also provides a more in-depth analysis of the meme. Redditors can subscribe to the bot by sending a private message to [u/MemeAdviser](https://reddit.com/u/MemeAdviser) with the text "Subscribe" as the subject or body.
 
 
-## Log
-The logfile is updated every 5 minutes
+## Development
+Check out [CONTRIBUTING.md](.github/CONTRIBUTING.md) for a comprehensive development guide.
 
-- [Online](https://www.param.me/MemeAdviser/log)
+### Production Environment
+- Ubuntu 18.04 LTS
+- Python 3.6.7
+
+### Log
+The logfile is pushed online every 5 minutes
+
+- [Web](https://www.param.me/MemeAdviser/log)
 - [Raw](https://raw.githubusercontent.com/wiki/paramt/MemeAdviser/memeadviser.log)
