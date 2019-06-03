@@ -1,11 +1,17 @@
+# https://editorconfig.org
+
 root = true
 
 [*.py]
-quote_type = double
-spaces_around_operators = true
-spaces_around_brackets = none
-indent_style = tab
-indent_size = 4
-trim_trailing_whitespace = true
-insert_final_newline = true
+
+# Universal properties (implemented by EditorConfig)
 end_of_line = lf
+indent_size = 4
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# General guidelines (not implemented by EditorConfig)
+quote_type = double
+spaces_around_brackets = none
+spaces_around_operators = true
