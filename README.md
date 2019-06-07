@@ -32,3 +32,6 @@ The logfile is pushed online every 5 minutes
 
 - [Web](https://www.param.me/MemeAdviser/log)
 - [Raw](https://raw.githubusercontent.com/wiki/paramt/MemeAdviser/memeadviser.log)
+
+## License
+This project is licensed under the [Mozilla Public License 2.0](LICENSE)
