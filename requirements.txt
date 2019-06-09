@@ -1,3 +1,4 @@
 praw==6.2.0
+flask==1.0.3
 pytest-cov
 codecov
