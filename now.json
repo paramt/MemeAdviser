@@ -1,6 +1,6 @@
 {
   "version": 2,
   "name": "MemeAdviser API",
-  "builds": [{ "src": "upvotes/index.py", "use": "@now/python" }],
+  "builds": [{ "src": "api/upvotes/index.py", "use": "@now/python" }],
   "alias": ["memeadviser"]
 }
