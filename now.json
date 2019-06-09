@@ -1,6 +1,13 @@
 {
   "version": 2,
   "name": "MemeAdviser API",
+  "env": {
+    "USER_AGENT": "@USER_AGENT",
+    "CLIENT_ID": "@CLIENT_ID",
+    "CLIENT_SECRET": "@CLIENT_SECRET",
+    "USERNAME": "@USERNAME",
+    "PASSWORD": "@PASSWORD"
+  },
   "builds": [{ "src": "api/upvotes/index.py", "use": "@now/python" }],
   "alias": ["memeadviser"]
 }
