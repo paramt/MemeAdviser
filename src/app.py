@@ -161,6 +161,7 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 				logger.debug(f"Attempting to send PMs to {len(subscribed)} subscribers")
 				for user in subscribed:
 					reddit.redditor(user).message("MemeEconomy Update", constants.Messages.pm.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
+					t.sleep(1)
 				logger.info(f"Sent PMs to {len(subscribed)} subscribers")
 
 		except Exception as e:
