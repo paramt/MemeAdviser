@@ -160,7 +160,11 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 			if submission.score < thresholds.pm:
 				logger.debug(f"Attempting to send PMs to {len(subscribed)} subscribers")
 				for user in subscribed:
-					reddit.redditor(user).message("MemeEconomy Update", constants.Messages.pm.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
+					try:
+						reddit.redditor(user).message("MemeEconomy Update", constants.Messages.pm.format(link=submission.permalink, upvotes=submission.score, break_even=algorithm.break_even(submission.score)))
+					except Exception as e:
+						logger.warning(f"An error occured while sending a PM to {user}: {e}. Skipping user and continuing")
+						continue
 					t.sleep(1)
 				logger.info(f"Sent PMs to {len(subscribed)} subscribers")
 
