@@ -169,7 +169,7 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 				logger.info(f"Sent PMs to {len(subscribed)} subscribers")
 
 		except Exception as e:
-			logger.error(f"An error occured while replying to submission ({submission.id}): {e}")
+			logger.critical(f"An error occured while replying to submission ({submission.id}): {e}")
 
 	update_subscriptions(reddit, subscribed, logger)
 
