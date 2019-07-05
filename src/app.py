@@ -101,7 +101,7 @@ def update_subscriptions(reddit, subscribed, logger):
 
 			# Handle unexpected messages
 			else:
-				message.reply("I don't understand your message. You can send me a message saying 'subscribe' or 'unsubscribe'. Here's a list of other things you can do:\n\n - [Contact the developer](https://www.reddit.com/message/compose?to=hypnotic-hippo&subject=MemeAdviser) \n - [Report a bug](https://github.com/paramt/MemeAdviser/issues/new?assignees=paramt&labels=bug&template=bug_report.md) \n - [Suggest a new feature](https://github.com/paramt/MemeAdviser/issues/new?assignees=paramt&labels=enhancement&template=feature_request.md) \n - [Visit my website](https://www.param.me/MemeAdviser/)")
+				message.reply("I don't understand your message. You can send me a message saying 'subscribe' or 'unsubscribe'. Here's a list of other things you can do:\n\n - [Contact the developer](https://www.reddit.com/message/compose?to=hypnotic-hippo&subject=MemeAdviser) \n - [Report a bug](https://github.com/paramt/MemeAdviser/issues/new?assignees=paramt&labels=bug&template=bug_report.md) \n - [Suggest a new feature](https://github.com/paramt/MemeAdviser/issues/new?assignees=paramt&labels=enhancement&template=feature_request.md) \n - [Find out more](https://www.param.me/MemeAdviser/)")
 
 	# Mark all messages as read
 	reddit.inbox.mark_read(unread_messages)
