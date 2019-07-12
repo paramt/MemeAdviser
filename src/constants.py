@@ -1,7 +1,7 @@
 class Thresholds:
 	submission = 600
-	comment = 1000
-	pm = 1000
+	comment = 800
+	pm = 800
 
 
 class Messages:
