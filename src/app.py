@@ -153,11 +153,6 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 			logger.debug("Updated replied.txt")
 
 		try:
-			# Post to r/InsiderMemeTrading
-			if submission.score < thresholds.submission:
-				reddit.subreddit("InsiderMemeTrading").submit(title=constants.Messages.submission.format(upvotes=submission.score, break_even=algorithm.break_even(submission.score)), url="https://reddit.com" + submission.permalink)
-				logger.info("Posted link to submission on r/InsiderMemeTrading")
-
 			# Comment on r/MemeEconomy post
 			if submission.score < thresholds.comment:
 				submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=time, break_even=algorithm.break_even(submission.score)))
