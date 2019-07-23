@@ -131,7 +131,8 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 	with open("subscribed.txt", "r") as f:
 		subscribed = f.read().splitlines()
 
-	if submission.id not in replied:
+	# Check to make sure that the meme is new and isn't NSFW
+	if submission.id not in replied and not submission.over_18:
 		logger.info(f"New submission found ({submission.id}) at {submission.score} upvotes")
 
 		# Only update /r/MemeAdviser wiki if it isn't running through pytest
