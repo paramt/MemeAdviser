@@ -75,8 +75,9 @@ def update_subscriptions(reddit, subscribed, logger):
 		# Go through each unread item in inbox
 		for message in reddit.inbox.unread():
 
-			# Make sure it's a PM and not a comment reply
-			if isinstance(message, praw.models.Message):
+			# 1. Make sure it's a PM and not a comment reply
+			# 2. Make sure the bot doesn't reply to itself in an infinite chain
+			if isinstance(message, praw.models.Message) and message.author != "MemeAdviser":
 				unread_messages.append(message)
 
 				# Check for new unsubscriptions
