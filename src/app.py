@@ -82,26 +82,26 @@ def update_subscriptions(reddit, subscribed, logger):
 				if message.author.name in subscribed:
 					subscribed.remove(message.author.name)
 					update_file()
-					message.reply("You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
+					message.reply(f"> {message.body} \n\n You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
 					logger.info(f"Removed {message.author.name} from subscribed.txt")
 
 				else:
-					message.reply("You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
+					message.reply(f"> {message.body} \n\n You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
 
 			# Check for new subscriptions
 			elif message.body.lower().strip() == "subscribe" or message.subject.lower().strip() == "subscribe":
 				if message.author.name not in subscribed:
 					subscribed.append(message.author.name)
 					update_file()
-					message.reply("You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
+					message.reply(f"> {message.body} \n\n You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
 					logger.info(f"Added {message.author.name} to subscribed.txt")
 
 				else:
-					message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
+					message.reply(f"> {message.body} \n\n You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
 
 			# Handle unexpected messages
 			else:
-				message.reply("I don't understand your message. You can send me a message saying 'subscribe' or 'unsubscribe'. Here's a list of other things you can do:\n\n - [Contact the developer](https://www.reddit.com/message/compose?to=hypnotic-hippo&subject=MemeAdviser) \n - [Report a bug](https://github.com/paramt/MemeAdviser/issues/new?assignees=paramt&labels=bug&template=bug_report.md) \n - [Suggest a new feature](https://github.com/paramt/MemeAdviser/issues/new?assignees=paramt&labels=enhancement&template=feature_request.md) \n - [Find out more](https://www.param.me/MemeAdviser/)")
+				message.reply(f"> {message.body} \n\n I don't understand your message. You can send me a message saying 'subscribe' or 'unsubscribe'. Here's a list of other things you can do:\n\n - [Contact the developer](https://www.reddit.com/message/compose?to=hypnotic-hippo&subject=MemeAdviser) \n - [Report a bug](https://github.com/paramt/MemeAdviser/issues/new?assignees=paramt&labels=bug&template=bug_report.md) \n - [Suggest a new feature](https://github.com/paramt/MemeAdviser/issues/new?assignees=paramt&labels=enhancement&template=feature_request.md) \n - [Find out more](https://www.param.me/MemeAdviser/)")
 
 	# Mark all messages as read
 	reddit.inbox.mark_read(unread_messages)
