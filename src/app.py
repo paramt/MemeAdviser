@@ -78,7 +78,7 @@ def update_subscriptions(reddit, subscribed, logger):
 			unread_messages.append(message)
 
 			# Check for new unsubscriptions
-			if re.search("unsubscribe", message.body, re.IGNORECASE) or re.search("unsubscribe", message.subject, re.IGNORECASE):
+			if message.body.lower().strip() == "unsubscribe" or message.subject.lower().strip() == "unsubscribe":
 				if message.author.name in subscribed:
 					subscribed.remove(message.author.name)
 					update_file()
@@ -89,7 +89,7 @@ def update_subscriptions(reddit, subscribed, logger):
 					message.reply("You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
 
 			# Check for new subscriptions
-			elif re.search("subscribe", message.body, re.IGNORECASE) or re.search("subscribe", message.subject, re.IGNORECASE):
+			elif message.body.lower().strip() == "subscribe" or message.subject.lower().strip() == "subscribe":
 				if message.author.name not in subscribed:
 					subscribed.append(message.author.name)
 					update_file()
