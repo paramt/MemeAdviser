@@ -1,6 +1,7 @@
 class Thresholds:
 	comment = 800
 	pm = 800
+	spam_time = 18000
 
 
 class Messages:
