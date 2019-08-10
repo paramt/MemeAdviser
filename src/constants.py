@@ -1,6 +1,11 @@
 class Thresholds:
+	# Only comment on submission if number of upvotes is less than this
 	comment = 800
+
+	# Only send PMs if number of upvotes is less than this
 	pm = 800
+
+	# The minimum time between recommendations (in seconds)
 	spam_time = 18000
 
 
