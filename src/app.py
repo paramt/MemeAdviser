@@ -70,7 +70,6 @@ def update_subscriptions(reddit, subscribed, logger):
 
 	unread_messages = []
 
-
 	try:
 		# Go through each unread item in inbox
 		for message in reddit.inbox.unread():
