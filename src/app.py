@@ -138,7 +138,7 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 		subscribed = f.read().splitlines()
 
 	# Check to make sure that the meme is new and isn't NSFW
-	if submission.id not in replied and not submission.over_18:
+	if submission.id not in replied and not submission.over_18 and t.time() - reddit.redditor("MemeAdviser").comments.new(limit=1).next().created_utc > 3600:
 		logger.info(f"New submission found ({submission.id}) at {submission.score} upvotes")
 
 		# Only update /r/MemeAdviser wiki if it isn't running through pytest
