@@ -137,7 +137,7 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 	with open("subscribed.txt", "r") as f:
 		subscribed = f.read().splitlines()
 
-	# Check to make sure that the meme is new and isn't NSFW
+	# Check to make sure that the meme is new, isn't NSFW, and isn't found in the same hour as previous memes
 	if submission.id not in replied and not submission.over_18 and t.time() - reddit.redditor("MemeAdviser").comments.new(limit=1).next().created_utc > 3600:
 		logger.info(f"New submission found ({submission.id}) at {submission.score} upvotes")
 
