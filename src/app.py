@@ -134,7 +134,7 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 
 	new = submission.id not in replied
 	nsfw = submission.over_18
-	spam = t.time() - reddit.redditor("MemeAdviser").comments.new(limit=1).next().created_utc < thresholds.spam_time
+	spam = t.time() - reddit.redditor("MemeAdviser").comments.new(limit=1).__next__().created_utc < thresholds.spam_time
 
 	# Check to make sure that the meme is new, isn't NSFW, and isn't creating spam
 	if new and not nsfw and not spam:
