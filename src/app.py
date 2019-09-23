@@ -43,10 +43,10 @@ def find_top_submission(reddit):
 	submissions = subreddit.hot()
 
 	# Find the top submission that isn't stickied
-	submission = __next__(submissions)
+	submission = submissions.__next__()
 
 	while submission.stickied:
-		submission = submissions.next()
+		submission = submissions.__next__()
 
 	# Find out how old the submission is
 	time = int(round((t.time() - submission.created_utc) / 60))
