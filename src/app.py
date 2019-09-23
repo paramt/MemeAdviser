@@ -9,17 +9,13 @@ import src.constants as constants
 
 # Configures logger
 def setup_logger(logfile):
-	logger = logging.getLogger(__name__)
+	logger = logging.getLogger()
 	logger.setLevel(logging.DEBUG)
 	formatter = logging.Formatter("%(levelname)-8s %(asctime)s: %(message)s")
 	file_handler = logging.FileHandler(logfile)
 	file_handler.setFormatter(formatter)
 	logger.addHandler(file_handler)
 	logger.propagate = False
-
-	logging.basicConfig(filename = logfile,
-						level = logging.INFO,
-						format = "%(levelname)-8s %(asctime)s: %(message)s")
 
 	return logger
 
@@ -47,7 +43,7 @@ def find_top_submission(reddit):
 	submissions = subreddit.hot()
 
 	# Find the top submission that isn't stickied
-	submission = next(submissions)
+	submission = __next__(submissions)
 
 	while submission.stickied:
 		submission = submissions.next()
