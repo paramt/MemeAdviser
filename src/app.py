@@ -9,17 +9,13 @@ import src.constants as constants
 
 # Configures logger
 def setup_logger(logfile):
-	logger = logging.getLogger(__name__)
+	logger = logging.getLogger()
 	logger.setLevel(logging.DEBUG)
 	formatter = logging.Formatter("%(levelname)-8s %(asctime)s: %(message)s")
 	file_handler = logging.FileHandler(logfile)
 	file_handler.setFormatter(formatter)
 	logger.addHandler(file_handler)
 	logger.propagate = False
-
-	logging.basicConfig(filename = logfile,
-						level = logging.INFO,
-						format = "%(levelname)-8s %(asctime)s: %(message)s")
 
 	return logger
 
@@ -47,10 +43,10 @@ def find_top_submission(reddit):
 	submissions = subreddit.hot()
 
 	# Find the top submission that isn't stickied
-	submission = next(submissions)
+	submission = submissions.__next__()
 
 	while submission.stickied:
-		submission = submissions.next()
+		submission = submissions.__next__()
 
 	# Find out how old the submission is
 	time = int(round((t.time() - submission.created_utc) / 60))
@@ -138,7 +134,7 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 
 	new = submission.id not in replied
 	nsfw = submission.over_18
-	spam = t.time() - reddit.redditor("MemeAdviser").comments.new(limit=1).next().created_utc < thresholds.spam_time
+	spam = t.time() - reddit.redditor("MemeAdviser").comments.new(limit=1).__next__().created_utc < thresholds.spam_time
 
 	# Check to make sure that the meme is new, isn't NSFW, and isn't creating spam
 	if new and not nsfw and not spam:
