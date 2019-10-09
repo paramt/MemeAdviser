@@ -1,3 +1,5 @@
+RUN = false
+
 import logging
 import os
 import re
@@ -137,7 +139,7 @@ def main(pytest: bool, thresholds=constants.Thresholds, logfile=constants.LOGFIL
 	spam = t.time() - reddit.redditor("MemeAdviser").comments.new(limit=1).__next__().created_utc < thresholds.spam_time
 
 	# Check to make sure that the meme is new, isn't NSFW, and isn't creating spam
-	if new and not nsfw and not spam:
+	if new and not nsfw and not spam and RUN:
 		logger.info(f"New submission found ({submission.id}) at {submission.score} upvotes")
 
 		# Only update /r/MemeAdviser wiki if it isn't running through pytest
