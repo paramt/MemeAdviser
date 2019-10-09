@@ -1,4 +1,4 @@
-RUN = false
+RUN = False
 
 import logging
 import os
