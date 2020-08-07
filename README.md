@@ -17,7 +17,7 @@ The bot also lets users subscribe to it. When it finds a promising meme, it mess
 
 
 ## Development
-Check out [CONTRIBUTING.md](.github/CONTRIBUTING.md) for a comprehensive development guide.
+This repository has been archived and no new PRs will be merged.
 
 ### Production Environment
 - Ubuntu 18.04 LTS
