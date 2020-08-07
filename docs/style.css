@@ -8,3 +8,16 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
     content: " Bot";
   }
 }
+
+#swal2-content {
+  font-size: 20px;
+}
+
+#swal2-title {
+  font-size: 30px;
+}
+
+button .swal2-styled .swal2-confirm {
+  font-size: 16px !important;
+  height: auto;
+}
