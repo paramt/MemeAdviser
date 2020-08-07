@@ -17,7 +17,12 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
   font-size: 30px;
 }
 
-button .swal2-styled .swal2-confirm {
-  font-size: 16px !important;
+.confirmButton {
+  font-size: 16px;
   height: auto;
+}
+
+.popup {
+  width: 500px !important;
+  padding: 30px 20px !important;
 }
